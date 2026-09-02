@@ -942,6 +942,10 @@ function closeLightbox(e) {
         document.body.style.overflow = '';
     }
 }
+document.querySelector('.lightbox-close').addEventListener('click', () => {
+    document.getElementById('lightbox').classList.remove('open');
+    document.body.style.overflow = '';
+});
 
 
 // COOKIES BANNER
