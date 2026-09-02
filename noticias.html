@@ -68,7 +68,39 @@
         footer { background: var(--oscuro); color: rgba(255,255,255,0.6); padding: 32px 5%; text-align: center; }
         footer a { color: var(--amarillo); text-decoration: none; font-size: 13px; font-weight: 600; }
         .footer-promo { margin-top: 12px; }
-    </style>
+    
+        .noticia-item { cursor: pointer; }
+        .modal-overlay {
+            display: none; position: fixed; inset: 0;
+            background: rgba(0,0,0,0.55); z-index: 9999;
+            align-items: center; justify-content: center;
+            backdrop-filter: blur(4px); padding: 24px;
+        }
+        .modal-overlay.open { display: flex; }
+        .modal-box {
+            background: white; border-radius: 28px; width: 100%; max-width: 580px;
+            max-height: 85vh; overflow-y: auto; position: relative;
+            animation: modalIn 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+            box-shadow: 0 32px 80px rgba(0,0,0,0.25);
+        }
+        @keyframes modalIn { from { opacity: 0; transform: scale(0.85) translateY(20px); } to { opacity: 1; transform: scale(1) translateY(0); } }
+        .modal-img { height: 200px; display: flex; align-items: center; justify-content: center; font-size: 80px; background: var(--azul); border-radius: 28px 28px 0 0; }
+        .modal-body { padding: 32px; }
+        .modal-fecha { font-size: 12px; color: var(--azul-claro); font-weight: 800; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px; }
+        .modal-body h2 { font-size: 24px; font-weight: 900; margin-bottom: 14px; line-height: 1.2; }
+        .modal-body p { font-size: 15px; color: var(--gris-texto); line-height: 1.8; margin-bottom: 20px; }
+        .modal-close {
+            float: right; margin: 16px 16px -52px auto; display: flex;
+            background: rgba(0,0,0,0.15); border: none; width: 36px; height: 36px;
+            border-radius: 50%; font-size: 16px; cursor: pointer; color: white;
+            align-items: center; justify-content: center; transition: transform 0.2s, background 0.2s;
+        }
+        .modal-close:hover { transform: scale(1.1) rotate(90deg); background: rgba(0,0,0,0.3); }
+        .noticia-tag-modal {
+            display: inline-block; background: var(--amarillo-claro); color: var(--oscuro);
+            font-size: 12px; font-weight: 800; padding: 4px 12px; border-radius: 50px;
+        }
+</style>
 </head>
 <body>
 <nav>
@@ -86,7 +118,7 @@
 
 <div class="noticias-container">
     <div class="noticias-lista">
-        <div class="noticia-item">
+        <div class="noticia-item" onclick="openModal('🎃','28 octubre 2026','Celebramos Halloween con los peques','Una tarde llena de disfraces, risas y actividades creativas para celebrar juntos esta divertida festividad. Los peques se disfrazaron de sus personajes favoritos y disfrutaron de juegos, canciones y mucha diversión.','Actividades')">
             <div class="noticia-icon">🎃</div>
             <div class="noticia-content">
                 <div class="noticia-meta">
@@ -97,7 +129,7 @@
                 <p>Una tarde llena de disfraces, risas y actividades creativas para celebrar juntos esta divertida festividad. Los peques se disfrazaron de sus personajes favoritos y disfrutaron de juegos, canciones y mucha diversión.</p>
             </div>
         </div>
-        <div class="noticia-item">
+        <div class="noticia-item" onclick="openModal('🍂','15 septiembre 2026','¡Bienvenidos al nuevo curso!','Comenzamos el curso con mucha energía y nuevas actividades pensadas para el desarrollo de nuestros peques. Este año estrenamos nuevas zonas de juego y actividades de estimulación temprana.','Curso')">
             <div class="noticia-icon">🍂</div>
             <div class="noticia-content">
                 <div class="noticia-meta">
@@ -108,7 +140,7 @@
                 <p>Comenzamos el curso con mucha energía y nuevas actividades pensadas para el desarrollo de nuestros peques. Este año estrenamos nuevas zonas de juego y actividades de estimulación temprana.</p>
             </div>
         </div>
-        <div class="noticia-item">
+        <div class="noticia-item" onclick="openModal('☀️','20 junio 2026','Fiesta de fin de curso','Celebramos el final del curso con una fiesta especial para los peques y sus familias. Hubo actuaciones, bailes, merienda y mucha emoción. ¡Fue un día increíble lleno de recuerdos para todos!','Eventos')">
             <div class="noticia-icon">☀️</div>
             <div class="noticia-content">
                 <div class="noticia-meta">
@@ -126,5 +158,43 @@
     <p>© 2026 CEI El Coto de los Peques · Alcalá la Real, Jaén</p>
     <div class="footer-promo"><a href="mailto:titanestudiosorg@gmail.com">✨ Escríbenos si quieres una web así</a></div>
 </footer>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modal" onclick="closeModal(event)">
+    <div class="modal-box">
+        <button class="modal-close" onclick="document.getElementById('modal').classList.remove('open');document.body.style.overflow=''">✕</button>
+        <div class="modal-img" id="modal-img">🎃</div>
+        <div class="modal-body">
+            <div class="modal-fecha" id="modal-fecha"></div>
+            <h2 id="modal-titulo"></h2>
+            <p id="modal-texto"></p>
+            <span class="noticia-tag-modal" id="modal-tag"></span>
+        </div>
+    </div>
+</div>
+
+<script>
+function openModal(icon, fecha, titulo, texto, tag) {
+    document.getElementById('modal-img').textContent = icon;
+    document.getElementById('modal-fecha').textContent = fecha;
+    document.getElementById('modal-titulo').textContent = titulo;
+    document.getElementById('modal-texto').textContent = texto;
+    document.getElementById('modal-tag').textContent = tag;
+    document.getElementById('modal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+}
+function closeModal(e) {
+    if (e.target === document.getElementById('modal')) {
+        document.getElementById('modal').classList.remove('open');
+        document.body.style.overflow = '';
+    }
+}
+document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+        document.getElementById('modal').classList.remove('open');
+        document.body.style.overflow = '';
+    }
+});
+</script>
 </body>
 </html>
