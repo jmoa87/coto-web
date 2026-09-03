@@ -2,6 +2,8 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
+    <link rel="icon" type="image/jpeg" href="icon.jpg">
+    <link rel="apple-touch-icon" href="icon.jpg">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CEI El Coto de los Peques · Guardería en Alcalá la Real</title>
     <meta name="description" content="Guardería El Coto de los Peques. Un lugar seguro, cálido y lleno de alegría donde tus peques crecen felices.">
@@ -953,15 +955,19 @@ function showCookieBanner() {
     if (!localStorage.getItem('cookies_coto')) {
         setTimeout(function() {
             var b = document.getElementById('cookie-banner');
-            b.style.transform = 'translateX(-50%) translateY(0)';
-            b.style.opacity = '1';
+            if (b) {
+                b.style.transform = 'translateX(-50%) translateY(0)';
+                b.style.opacity = '1';
+            }
         }, 1500);
     }
 }
 function hideCookieBanner() {
     var b = document.getElementById('cookie-banner');
-    b.style.transform = 'translateX(-50%) translateY(140px)';
-    b.style.opacity = '0';
+    if (b) {
+        b.style.transform = 'translateX(-50%) translateY(140px)';
+        b.style.opacity = '0';
+    }
 }
 function acceptCookies() { localStorage.setItem('cookies_coto', 'accepted'); hideCookieBanner(); }
 function rejectCookies() { localStorage.setItem('cookies_coto', 'rejected'); hideCookieBanner(); }
