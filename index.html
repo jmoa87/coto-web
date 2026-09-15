@@ -109,7 +109,7 @@
         .hero-logo {
             position: relative; z-index: 2; flex-shrink: 0;
         }
-        .hero-logo img { width: clamp(200px, 30vw, 360px) !important; }
+        .hero-logo img { width: clamp(260px, 35vw, 440px) !important; }
         .hero-logo img {
             width: clamp(200px, 30vw, 340px); border-radius: 50%; opacity: 0.92;
             filter: drop-shadow(0 20px 60px rgba(0,0,0,0.3));
@@ -275,7 +275,7 @@
             nav ul { display: none; } .btn-contacto { display: none; } .hamburger { display: flex; }
             nav ul.open { display: flex; flex-direction: column; position: fixed; top: 68px; left: 0; right: 0; background: white; padding: 20px 5%; gap: 16px; border-bottom: 2px solid var(--amarillo); }
             .hero-logo { display: flex; justify-content: center; margin-top: 24px; }
-            .hero-logo img { width: 200px !important; }
+            .hero-logo img { width: 240px !important; }
             .hero-inner { flex-direction: column; text-align: center; }
             .hero-btns { justify-content: center; }
             .info-grid { grid-template-columns: 1fr; }
@@ -545,7 +545,7 @@
         <li><a href="#servicios">Servicios</a></li>
         <li><a href="#nosotros">Nosotros</a></li>
         <li><a href="#noticias">Noticias</a></li>
-        <li><a href="#secretaria">Secretaría</a></li>
+        <li><a href="secretaria.html">Secretaría</a></li>
         <li><a href="#contacto">Contacto</a></li>
     </ul>
     <a href="#contacto" class="btn-contacto">Contactar</a>
@@ -857,66 +857,6 @@
     </div>
 </section>
 
-
-<!-- SECRETARÍA VIRTUAL -->
-<section id="secretaria" style="padding: 80px 5%; background: var(--gris);">
-    <div class="section-eyebrow">Documentación oficial</div>
-    <h2 class="section-title">Secretaría Virtual</h2>
-    <p class="section-sub" style="margin-bottom: 40px;">Aquí encontrarás todos los documentos oficiales de la Junta de Andalucía necesarios para la inscripción de tu peque. Descárgalos, rellénalos y tráelos al centro.</p>
-
-    <div style="max-width: 800px; margin: 0 auto;">
-        <!-- Período ordinario -->
-        <div style="background: white; border-radius: 20px; padding: 32px; margin-bottom: 24px; border-left: 5px solid var(--azul);">
-            <div style="display:flex; align-items:center; gap:12px; margin-bottom: 20px;">
-                <span style="background:var(--azul); color:white; border-radius:10px; padding:8px 16px; font-size:13px; font-weight:800;">📅 Período de Inscripción Ordinario</span>
-                <span style="font-size:14px; color:var(--gris-texto); font-weight:700;">1 al 30 de abril</span>
-            </div>
-            <p style="font-size:15px; font-weight:800; color:var(--oscuro); margin-bottom:16px;">Documentos para descargar:</p>
-            <div style="display:flex; flex-direction:column; gap:12px;">
-                <a href="https://www.juntadeandalucia.es/educacion/portales/documents/100629/1791480/Anexo%20II.%20Procedimiento%20ordinario%20de%20admisi%C3%B3n.pdf/3cbad465-069e-4294-b9a7-979248e110ad?version=1.3" target="_blank" class="doc-link">
-                    <span class="doc-icon">📄</span>
-                    <div>
-                        <div class="doc-title">Anexo II. Procedimiento ordinario de admisión</div>
-                        <div class="doc-sub">Autorellenable · PDF oficial Junta de Andalucía</div>
-                    </div>
-                    <span class="doc-badge">Descargar</span>
-                </a>
-                <a href="https://www.juntadeandalucia.es/educacion/portales/documents/100629/1791480/Anexo%20V.%20Procedimiento%20Extraordinario%20de%20admision.%20Autorellenable.pdf/330b9141-9de5-f268-6744-d59b9528ad06?version=1.3" target="_blank" class="doc-link">
-                    <span class="doc-icon">📄</span>
-                    <div>
-                        <div class="doc-title">Anexo V. Procedimiento Extraordinario de admisión</div>
-                        <div class="doc-sub">Autorellenable · PDF oficial Junta de Andalucía</div>
-                    </div>
-                    <span class="doc-badge">Descargar</span>
-                </a>
-                <a href="https://www.juntadeandalucia.es/educacion/portales/documents/100629/1791480/DOC_1_Consentimiento_Protecci%C3%B3n%20de%20Datos_medios.pdf/7408d137-68bf-0460-0693-3c16e6e55c09?version=1.1" target="_blank" class="doc-link">
-                    <span class="doc-icon">📄</span>
-                    <div>
-                        <div class="doc-title">Consentimiento Protección de Datos</div>
-                        <div class="doc-sub">PDF oficial Junta de Andalucía</div>
-                    </div>
-                    <span class="doc-badge">Descargar</span>
-                </a>
-                <a href="https://www.juntadeandalucia.es/educacion/portales/documents/100629/1791480/Anexo%20Declaracio%C2%BFn%20de%20usos%20de%20servicios.pdf/d3d42c2f-be3d-5b7c-8205-5aa1b063d561?version=1.2" target="_blank" class="doc-link">
-                    <span class="doc-icon">📄</span>
-                    <div>
-                        <div class="doc-title">Declaración de usos de servicios</div>
-                        <div class="doc-sub">PDF oficial Junta de Andalucía</div>
-                    </div>
-                    <span class="doc-badge">Descargar</span>
-                </a>
-                <a href="https://www.juntadeandalucia.es/educacion/portales/documents/100629/185770/Anexo%20I.%20Formulario%20definitivo-APAE.pdf/be34ad7f-f1a6-0446-ef38-401944c73073?version=1.3" target="_blank" class="doc-link">
-                    <span class="doc-icon">📄</span>
-                    <div>
-                        <div class="doc-title">Modelo de solicitud Programa de Ayudas</div>
-                        <div class="doc-sub">PDF oficial Junta de Andalucía</div>
-                    </div>
-                    <span class="doc-badge">Descargar</span>
-                </a>
-            </div>
-        </div>
-    </div>
-</section>
 
 <!-- CONTACTO -->
 <section id="contacto">
