@@ -588,7 +588,7 @@
         <p><strong style="color:var(--amarillo)">Estamos adheridos al programa de Ayudas de la Junta de Andalucía.</strong></p>
         <div class="hero-btns">
             <a href="https://wa.me/34622120613?text=Hola%2C%20me%20gustar%C3%ADa%20obtener%20m%C3%A1s%20informaci%C3%B3n%20sobre%20la%20guarder%C3%ADa%20El%20Coto%20de%20los%20Peques" target="_blank" class="btn-amarillo">💬 Contactar por WhatsApp</a>
-            <a href="#nosotros" class="btn-outline">Conoce al equipo</a>
+            <a href="#noticias" class="btn-outline">Noticias</a>
         </div>
     </div>
     </div>
@@ -604,10 +604,31 @@
 <!-- SERVICIOS -->
 <!-- EQUIPO Y SERVICIOS -->
 <!-- QUIÉNES SOMOS -->
+<style>
+.viñeta-col {
+    padding: 48px 40px;
+    transition: transform 0.25s ease, filter 0.25s ease;
+    cursor: default;
+}
+.viñeta-col:hover {
+    transform: translateY(-6px);
+    filter: brightness(1.08);
+}
+.foto-equipo {
+    width: 100%;
+    border-radius: 20px;
+    box-shadow: 0 12px 48px rgba(0,0,0,0.12);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+.foto-equipo:hover {
+    transform: scale(1.03);
+    box-shadow: 0 20px 64px rgba(0,0,0,0.18);
+}
+</style>
 <section id="servicios" style="padding:80px 5% 0;background:#f8f9fb;">
     <div style="max-width:1200px;margin:0 auto;">
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;padding-bottom:80px;">
-            <img src="equipo.jpeg" alt="Equipo El Coto de los Peques" style="width:100%;border-radius:20px;box-shadow:0 12px 48px rgba(0,0,0,0.12);">
+            <img src="equipo.jpeg" alt="Equipo El Coto de los Peques" class="foto-equipo">
             <div>
                 <div style="font-size:13px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#e53935;margin-bottom:12px;">Nuestro equipo</div>
                 <h2 style="font-size:36px;font-weight:900;color:var(--azul);margin:0 0 24px;line-height:1.2;">¿Quiénes somos?</h2>
@@ -621,17 +642,18 @@
     <div style="display:grid;grid-template-columns:repeat(4,1fr);">
 
         <!-- ROJO -->
-        <div style="background:#c0392b;padding:48px 40px;">
+        <div class="viñeta-col" style="background:#c0392b;border-radius:20px 0 0 0;">
             <div style="font-size:36px;margin-bottom:16px;">👩‍👩‍👧‍👦</div>
             <h3 style="color:white;font-size:20px;font-weight:800;margin:0 0 16px;">¿Quiénes somos?</h3>
-            <p style="color:rgba(255,255,255,0.88);font-size:15px;line-height:1.8;margin:0;">Un equipo con vocación, formación especializada y más de 15 años cuidando y acompañando a los más pequeños.</p>
+            <p style="color:rgba(255,255,255,0.92);font-size:15px;line-height:1.85;margin:0;">Un equipo formado por maestras, educadoras, personal de cocina y administración cualificadas y con amplia experiencia (desde 2009), que entendemos la Escuela Infantil como un espacio de cuidado, cariño y aprendizaje.<br><br>
+            Prestamos nuestros servicios en un pequeño cole que hace que el contacto con las familias sea continuo para que nuestros peques se sientan seguros, queridos y acompañados.</p>
         </div>
 
         <!-- AZUL -->
-        <div style="background:var(--azul);padding:48px 40px;">
+        <div class="viñeta-col" style="background:var(--azul);">
             <div style="font-size:36px;margin-bottom:16px;">🎯</div>
             <h3 style="color:white;font-size:20px;font-weight:800;margin:0 0 16px;">¿Qué ofrecemos?</h3>
-            <ul style="color:rgba(255,255,255,0.88);font-size:14px;line-height:1.85;margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:6px;">
+            <ul style="color:rgba(255,255,255,0.92);font-size:14px;line-height:1.85;margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:6px;">
                 <li>🏫 Instalaciones adaptadas, aulas por edades, climatizadas, luminosas, gran patio y aparcamiento</li>
                 <li>🍽️ Cocina propia con menús sanos adaptados a alergias y dietas especiales</li>
                 <li>⏰ Horario flexible para conciliar</li>
@@ -644,11 +666,11 @@
         </div>
 
         <!-- VERDE -->
-        <div style="background:#27ae60;padding:48px 40px;">
+        <div class="viñeta-col" style="background:#27ae60;">
             <div style="font-size:36px;margin-bottom:16px;">⭐</div>
             <h3 style="color:white;font-size:20px;font-weight:800;margin:0 0 16px;">¿Por qué elegirnos?</h3>
-            <p style="color:rgba(255,255,255,0.88);font-size:14px;line-height:1.8;margin:0 0 14px;">Porque cada niñ@ es únic@ y merece atención basada en el cariño y el respeto. Nuestros objetivos:</p>
-            <ul style="color:rgba(255,255,255,0.88);font-size:14px;line-height:1.85;margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:5px;">
+            <p style="color:rgba(255,255,255,0.92);font-size:14px;line-height:1.8;margin:0 0 14px;">Porque cada niñ@ es únic@ y merece atención basada en el cariño y el respeto. Nuestros objetivos:</p>
+            <ul style="color:rgba(255,255,255,0.92);font-size:14px;line-height:1.85;margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:5px;">
                 <li>🏡 Ambiente familiar y cercano</li>
                 <li>🌱 Respeto a los ritmos de desarrollo</li>
                 <li>🎲 Aprendizaje mediante el juego</li>
@@ -659,13 +681,13 @@
         </div>
 
         <!-- AMARILLO -->
-        <div style="background:var(--amarillo);padding:48px 40px;">
+        <div class="viñeta-col" style="background:var(--amarillo);border-radius:0 20px 0 0;">
             <div style="font-size:36px;margin-bottom:16px;">📞</div>
-            <h3 style="color:var(--azul);font-size:20px;font-weight:800;margin:0 0 16px;">¿Cómo contactar?</h3>
-            <p style="color:var(--azul);font-size:15px;line-height:1.8;margin:0 0 24px;">Queremos que las familias tengan la tranquilidad de saber que sus pequeños crecen en un entorno donde se sienten queridos. ¡Formaos parte de nuestra comunidad!</p>
+            <h3 style="color:white;font-size:20px;font-weight:800;margin:0 0 16px;text-shadow:0 1px 3px rgba(0,0,0,0.2);">¿Cómo contactar?</h3>
+            <p style="color:white;font-size:15px;line-height:1.8;margin:0 0 24px;text-shadow:0 1px 2px rgba(0,0,0,0.15);">Queremos que las familias tengan la tranquilidad de saber que sus pequeños crecen en un entorno donde se sienten queridos. ¡Formaos parte de nuestra comunidad!</p>
             <a href="tel:622120613" style="display:block;background:var(--azul);color:white;padding:12px 20px;border-radius:50px;font-size:15px;font-weight:800;text-decoration:none;text-align:center;margin-bottom:10px;">📞 622 120 613</a>
             <a href="https://wa.me/34622120613" target="_blank" style="display:block;background:#25D366;color:white;padding:12px 20px;border-radius:50px;font-size:15px;font-weight:800;text-decoration:none;text-align:center;margin-bottom:20px;">💬 WhatsApp</a>
-            <p style="color:var(--azul);font-size:13px;font-weight:600;margin:0;text-align:center;">📍 Ctra. de Villalobos, 10 · Alcalá la Real</p>
+            <a href="https://maps.google.com/?q=Carretera+de+Villalobos+10+Alcalá+la+Real" target="_blank" style="display:block;color:white;font-size:13px;font-weight:700;text-align:center;text-decoration:underline;text-underline-offset:3px;">📍 Ctra. de Villalobos, 10 · Alcalá la Real</a>
         </div>
 
     </div>
@@ -673,10 +695,15 @@
 <style>
 @media(max-width:900px){
     #servicios > div:first-child > div:first-child{grid-template-columns:1fr!important;}
-    #servicios > div:last-child{grid-template-columns:1fr 1fr!important;}
+    #servicios > div:nth-child(3){grid-template-columns:1fr 1fr!important;}
+    #servicios > div:nth-child(3) > .viñeta-col:first-child{border-radius:20px 0 0 0!important;}
+    #servicios > div:nth-child(3) > .viñeta-col:nth-child(2){border-radius:0 20px 0 0!important;}
+    #servicios > div:nth-child(3) > .viñeta-col:nth-child(3){border-radius:0!important;}
+    #servicios > div:nth-child(3) > .viñeta-col:last-child{border-radius:0!important;}
 }
 @media(max-width:500px){
-    #servicios > div:last-child{grid-template-columns:1fr!important;}
+    #servicios > div:nth-child(3){grid-template-columns:1fr!important;}
+    #servicios > div:nth-child(3) > .viñeta-col{border-radius:0!important;}
 }
 </style>
 
