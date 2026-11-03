@@ -645,7 +645,7 @@
     </div>
 
     <!-- 4 COLUMNAS A ANCHO COMPLETO -->
-    <div style="display:grid;grid-template-columns:repeat(4,1fr);">
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);" id="viñetas-grid">
 
         <!-- ROJO -->
         <div class="viñeta-col" style="background:#c0392b;border-radius:20px 0 0 0;">
@@ -945,6 +945,19 @@ function hideCookieBanner() {
 function acceptCookies() { localStorage.setItem('cookies_coto', 'accepted'); hideCookieBanner(); }
 function rejectCookies() { localStorage.setItem('cookies_coto', 'rejected'); hideCookieBanner(); }
 window.addEventListener('load', showCookieBanner);
+
+// Móvil: viñetas en 1 columna
+function adjustViñetas() {
+    var grid = document.getElementById('viñetas-grid');
+    if (!grid) return;
+    if (window.innerWidth <= 768) {
+        grid.style.gridTemplateColumns = '1fr';
+    } else {
+        grid.style.gridTemplateColumns = 'repeat(4,1fr)';
+    }
+}
+window.addEventListener('load', adjustViñetas);
+window.addEventListener('resize', adjustViñetas);
 
 // Móvil: mover logo dentro del hero-inner para que quede arriba del texto
 function adjustHeroMobile() {
