@@ -289,11 +289,12 @@
         /* MOBILE */
         @media (max-width: 768px) {
             nav ul { display: none; } .btn-contacto { display: none; } .hamburger { display: flex; }
-            nav ul.open { display: flex; flex-direction: column; position: fixed; top: 68px; left: 0; right: 0; background: white; padding: 20px 5%; gap: 16px; border-bottom: 2px solid var(--amarillo); }
-            .hero-logo { display: flex; justify-content: center; margin-top: 24px; }
-            .hero-logo img { width: 240px !important; }
-            .hero-inner { flex-direction: column; text-align: center; }
-            .hero-btns { justify-content: center; }
+            nav ul.open { display: flex; flex-direction: column; position: fixed; top: 68px; left: 0; right: 0; background: white; padding: 20px 5%; gap: 16px; border-bottom: 2px solid var(--amarillo); align-items: center; text-align: center; }
+            .hero-logo { display: flex; justify-content: center; }
+            .hero-logo img { width: 200px !important; }
+            .hero-inner { flex-direction: column-reverse; text-align: center; gap: 24px; }
+            .hero-btns { flex-direction: column; align-items: center; gap: 12px; }
+            .hero-btns a { width: 100%; max-width: 280px; text-align: center; justify-content: center; }
             .info-grid { grid-template-columns: 1fr; }
             .footer-inner { flex-direction: column; text-align: center; }
             .footer-links { flex-wrap: wrap; justify-content: center; }
@@ -550,9 +551,10 @@
         .doc-link:hover .doc-badge { background: var(--amarillo); color: var(--oscuro); }
 
         @media (max-width: 1024px) and (min-width: 769px) {
-            .hero-inner { flex-direction: column; text-align: center; gap: 40px; }
+            .hero-inner { flex-direction: column-reverse; text-align: center; gap: 32px; }
             .hero-logo img { width: 200px !important; }
-            .hero-btns { justify-content: center; }
+            .hero-btns { flex-direction: column; align-items: center; gap: 12px; }
+            .hero-btns a { width: 100%; max-width: 280px; text-align: center; justify-content: center; }
             .hero-content { max-width: 100%; }
         }
         </style>
@@ -566,7 +568,7 @@
     </a>
     <ul id="nav-menu">
         <li><a href="#servicios">Nosotros</a></li>
-        <li><a href="#noticias">Noticias</a></li>
+        <li><a href="noticias.html">Noticias</a></li>
         <li><a href="secretaria.html">Secretaría</a></li>
         <li><a href="#contacto">Contacto</a></li>
     </ul>
@@ -700,7 +702,7 @@
     #servicios > div:nth-child(3) > .viñeta-col:nth-child(3){border-radius:0!important;}
     #servicios > div:nth-child(3) > .viñeta-col:last-child{border-radius:0!important;}
 }
-@media(max-width:500px){
+@media(max-width:700px){
     #servicios > div:nth-child(3){grid-template-columns:1fr!important;}
     #servicios > div:nth-child(3) > .viñeta-col{border-radius:0!important;}
 }
@@ -837,7 +839,7 @@
         <div class="footer-links">
             <a href="#servicios">Servicios</a>
             <a href="#nosotros">Nosotros</a>
-            <a href="#noticias">Noticias</a>
+            <a href="noticias.html">Noticias</a>
             <a href="#contacto">Contacto</a>
         </div>
     </div>
