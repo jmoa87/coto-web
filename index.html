@@ -117,9 +117,8 @@
         .hero-logo {
             position: relative; z-index: 2; flex-shrink: 0;
         }
-        .hero-logo img { width: clamp(260px, 35vw, 440px) !important; }
         .hero-logo img {
-            width: clamp(200px, 30vw, 340px); border-radius: 50%; opacity: 0.92;
+            width: clamp(220px, 30vw, 360px); border-radius: 50%; opacity: 0.92;
             filter: drop-shadow(0 20px 60px rgba(0,0,0,0.3));
             animation: flotar 4s ease-in-out infinite;
         }
@@ -649,7 +648,7 @@
     </div>
 
     <!-- 4 COLUMNAS A ANCHO COMPLETO -->
-    <div style="display:grid;grid-template-columns:repeat(4,1fr);" id="viñetas-grid">
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);" id="viñetas-grid" class="viñetas-grid-wrap">
 
         <!-- ROJO -->
         <div class="viñeta-col" style="background:#c0392b;border-radius:20px 0 0 0;">
@@ -953,13 +952,18 @@ window.addEventListener('load', showCookieBanner);
 // MÓVIL: viñetas en 1 columna (4 filas), desktop en 4 columnas
 function fixViñetas() {
     var grid = document.getElementById('viñetas-grid');
-    if (grid) {
-        grid.style.gridTemplateColumns = window.innerWidth <= 768 ? '1fr' : 'repeat(4,1fr)';
+    if (!grid) return;
+    if (window.innerWidth <= 768) {
+        grid.style.setProperty('grid-template-columns', '1fr', 'important');
+    } else {
+        grid.style.setProperty('grid-template-columns', 'repeat(4,1fr)', 'important');
     }
 }
 document.addEventListener('DOMContentLoaded', fixViñetas);
+window.addEventListener('load', fixViñetas);
 window.addEventListener('resize', fixViñetas);
-setTimeout(fixViñetas, 100);
+setTimeout(fixViñetas, 50);
+setTimeout(fixViñetas, 300);
 
 // ESC cierra todo
 document.addEventListener('keydown', e => {
