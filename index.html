@@ -648,10 +648,21 @@
 }
 .btn-viñeta-icono {
     display: inline-block;
-    transition: transform 0.3s ease;
+    animation: girar 2.5s ease-in-out infinite;
 }
-.btn-viñeta-icono:hover {
-    animation: girar 0.5s ease;
+@keyframes pulso-pin {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-4px) scale(1.3); }
+}
+.dir-link {
+    display: block; color: white; font-size: 13px; font-weight: 700;
+    text-align: center; text-decoration: underline; text-underline-offset: 3px;
+    transition: opacity 0.2s;
+}
+.dir-link:hover { opacity: 0.8; }
+.dir-pin {
+    display: inline-block;
+    animation: pulso-pin 1.2s ease-in-out infinite;
 }
 .foto-equipo {
     width: 100%;
@@ -683,16 +694,16 @@
         <!-- ROJO -->
         <div class="viñeta-col" style="background:#c0392b;border-radius:20px 0 0 0;">
             <div class="viñeta-icono">👩‍👩‍👧‍👦</div>
-            <h3 style="color:white;font-size:20px;font-weight:800;margin:0 0 16px;">¿Quiénes somos?</h3>
-            <p style="color:rgba(255,255,255,0.92);font-size:15px;line-height:1.85;margin:0;">Un equipo formado por maestras, educadoras, personal de cocina y administración cualificadas y con amplia experiencia (desde 2009), que entendemos la Escuela Infantil como un espacio de cuidado, cariño y aprendizaje.<br><br>
+            <h3 style="color:white;font-size:22px;font-weight:800;margin:0 0 16px;">¿Quiénes somos?</h3>
+            <p style="color:rgba(255,255,255,0.92);font-size:17px;line-height:1.85;margin:0;">Un equipo formado por maestras, educadoras, personal de cocina y administración cualificadas y con amplia experiencia (desde 2009), que entendemos la Escuela Infantil como un espacio de cuidado, cariño y aprendizaje.<br><br>
             Prestamos nuestros servicios en un pequeño cole que hace que el contacto con las familias sea continuo para que nuestros peques se sientan seguros, queridos y acompañados.</p>
         </div>
 
         <!-- AZUL -->
         <div class="viñeta-col" style="background:var(--azul);">
             <div class="viñeta-icono">🎯</div>
-            <h3 style="color:white;font-size:20px;font-weight:800;margin:0 0 16px;">¿Qué ofrecemos?</h3>
-            <ul style="color:rgba(255,255,255,0.92);font-size:14px;line-height:1.85;margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:6px;">
+            <h3 style="color:white;font-size:22px;font-weight:800;margin:0 0 16px;">¿Qué ofrecemos?</h3>
+            <ul style="color:rgba(255,255,255,0.92);font-size:16px;line-height:1.85;margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:6px;">
                 <li>🏫 Instalaciones adaptadas, aulas por edades, climatizadas, luminosas, gran patio y aparcamiento</li>
                 <li>🍽️ Cocina propia con menús sanos adaptados a alergias y dietas especiales</li>
                 <li>⏰ Horario flexible para conciliar</li>
@@ -707,9 +718,9 @@
         <!-- VERDE -->
         <div class="viñeta-col" style="background:#27ae60;">
             <div class="viñeta-icono">⭐</div>
-            <h3 style="color:white;font-size:20px;font-weight:800;margin:0 0 16px;">¿Por qué elegirnos?</h3>
-            <p style="color:rgba(255,255,255,0.92);font-size:14px;line-height:1.8;margin:0 0 14px;">Porque cada niñ@ es únic@ y merece atención basada en el cariño y el respeto. Nuestros objetivos:</p>
-            <ul style="color:rgba(255,255,255,0.92);font-size:14px;line-height:1.85;margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:5px;">
+            <h3 style="color:white;font-size:22px;font-weight:800;margin:0 0 16px;">¿Por qué elegirnos?</h3>
+            <p style="color:rgba(255,255,255,0.92);font-size:16px;line-height:1.8;margin:0 0 14px;">Porque cada niñ@ es únic@ y merece atención basada en el cariño y el respeto. Nuestros objetivos:</p>
+            <ul style="color:rgba(255,255,255,0.92);font-size:16px;line-height:1.85;margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:5px;">
                 <li>🏡 Ambiente familiar y cercano</li>
                 <li>🌱 Respeto a los ritmos de desarrollo</li>
                 <li>🎲 Aprendizaje mediante el juego</li>
@@ -722,11 +733,11 @@
         <!-- AMARILLO -->
         <div class="viñeta-col" style="background:var(--amarillo);border-radius:0 20px 0 0;">
             <div class="viñeta-icono">📞</div>
-            <h3 style="color:white;font-size:20px;font-weight:800;margin:0 0 16px;text-shadow:0 1px 3px rgba(0,0,0,0.2);">¿Cómo contactar?</h3>
-            <p style="color:white;font-size:15px;line-height:1.8;margin:0 0 24px;text-shadow:0 1px 2px rgba(0,0,0,0.15);">Queremos que las familias tengan la tranquilidad de saber que sus pequeños crecen en un entorno donde se sienten queridos. ¡Formaos parte de nuestra comunidad!</p>
+            <h3 style="color:white;font-size:22px;font-weight:800;margin:0 0 16px;text-shadow:0 1px 3px rgba(0,0,0,0.2);">¿Cómo contactar?</h3>
+            <p style="color:white;font-size:17px;line-height:1.8;margin:0 0 24px;text-shadow:0 1px 2px rgba(0,0,0,0.15);">Queremos que las familias tengan la tranquilidad de saber que sus pequeños crecen en un entorno donde se sienten queridos y valorados, por ello nos gustaría que formaseis parte de nuestra comunidad educativa, llamadnos al:</p>
             <a href="tel:622120613" style="display:block;background:var(--azul);color:white;padding:12px 20px;border-radius:50px;font-size:15px;font-weight:800;text-decoration:none;text-align:center;margin-bottom:10px;transition:transform 0.2s,box-shadow 0.2s;" onmouseover="this.style.transform='scale(1.05)';this.style.boxShadow='0 6px 20px rgba(0,0,0,0.25)'" onmouseout="this.style.transform='';this.style.boxShadow=''"><span class="btn-viñeta-icono">📞</span> 622 120 613</a>
             <a href="https://wa.me/34622120613" target="_blank" style="display:block;background:#25D366;color:white;padding:12px 20px;border-radius:50px;font-size:15px;font-weight:800;text-decoration:none;text-align:center;margin-bottom:20px;transition:transform 0.2s,box-shadow 0.2s;" onmouseover="this.style.transform='scale(1.05)';this.style.boxShadow='0 6px 20px rgba(0,0,0,0.25)'" onmouseout="this.style.transform='';this.style.boxShadow=''"><span class="btn-viñeta-icono">💬</span> WhatsApp</a>
-            <a href="https://maps.google.com/?q=Carretera+de+Villalobos+10+Alcalá+la+Real" target="_blank" style="display:block;color:white;font-size:13px;font-weight:700;text-align:center;text-decoration:underline;text-underline-offset:3px;">📍 Ctra. de Villalobos, 10 · Alcalá la Real</a>
+            <a href="https://maps.google.com/?q=Carretera+de+Villalobos+10+Alcalá+la+Real" target="_blank" class="dir-link"><span class="dir-pin">📍</span> Ctra. de Villalobos, 10 · Alcalá la Real</a>
         </div>
 
     </div>
