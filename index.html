@@ -946,41 +946,36 @@ function acceptCookies() { localStorage.setItem('cookies_coto', 'accepted'); hid
 function rejectCookies() { localStorage.setItem('cookies_coto', 'rejected'); hideCookieBanner(); }
 window.addEventListener('load', showCookieBanner);
 
-// Móvil: viñetas en 1 columna
-function adjustViñetas() {
+// MÓVIL: viñetas en 1 columna (filas), desktop en 4 columnas
+function fixLayout() {
     var grid = document.getElementById('viñetas-grid');
-    if (!grid) return;
-    if (window.innerWidth <= 768) {
-        grid.style.gridTemplateColumns = '1fr';
-    } else {
-        grid.style.gridTemplateColumns = 'repeat(4,1fr)';
+    if (grid) {
+        grid.style.gridTemplateColumns = window.innerWidth <= 768 ? '1fr' : 'repeat(4,1fr)';
     }
-}
-window.addEventListener('load', adjustViñetas);
-window.addEventListener('resize', adjustViñetas);
-
-// Móvil: mover logo dentro del hero-inner para que quede arriba del texto
-function adjustHeroMobile() {
     var logo = document.querySelector('.hero-logo');
     var inner = document.querySelector('.hero-inner');
-    var content = document.querySelector('.hero-content');
-    if (!logo || !inner || !content) return;
-    if (window.innerWidth <= 768) {
-        if (inner.firstElementChild !== logo) {
-            inner.insertBefore(logo, inner.firstElementChild);
-            logo.style.cssText = 'display:flex;justify-content:center;margin-bottom:0;';
-        }
-    } else {
-        // Desktop: logo fuera del hero-inner, después del cierre
-        var section = document.querySelector('.hero');
-        if (logo.parentElement === inner) {
-            inner.parentElement.insertBefore(logo, inner.nextSibling);
+    if (logo && inner) {
+        if (window.innerWidth <= 768) {
+            // Móvil: logo va PRIMERO dentro de hero-inner
+            if (!inner.contains(logo) || inner.firstElementChild !== logo) {
+                inner.insertBefore(logo, inner.firstElementChild);
+            }
+            logo.style.cssText = 'display:flex !important;justify-content:center !important;width:100% !important;margin-bottom:16px !important;order:-1 !important;';
+            logo.querySelector('img').style.cssText = 'width:140px !important;';
+        } else {
+            // Desktop: logo fuera de hero-inner, al mismo nivel
+            if (inner.contains(logo)) {
+                inner.parentElement.appendChild(logo);
+            }
             logo.style.cssText = '';
+            logo.querySelector('img').style.cssText = '';
         }
     }
 }
-window.addEventListener('load', adjustHeroMobile);
-window.addEventListener('resize', adjustHeroMobile);
+document.addEventListener('DOMContentLoaded', fixLayout);
+window.addEventListener('resize', fixLayout);
+setTimeout(fixLayout, 100);
+setTimeout(fixLayout, 500);
 
 // ESC cierra todo
 document.addEventListener('keydown', e => {
