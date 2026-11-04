@@ -468,6 +468,9 @@
         nav ul a:hover::after { transform: scaleX(1); }
 
         .hero-inner-wrap { max-width: 1200px; margin: 0 auto; width: 100%; display: flex; align-items: center; justify-content: space-between; position: relative; z-index: 2; }
+        /* Viñetas: 4 columnas en escritorio, 1 columna (torre) en móvil */
+        #viñetas-grid { display: grid; grid-template-columns: repeat(4,1fr); }
+        @media(max-width:768px) { #viñetas-grid { grid-template-columns: 1fr !important; } }
         .section-wrap { max-width: 1100px; margin: 0 auto; }
 
         @keyframes burbuja1 {
@@ -648,7 +651,7 @@
     </div>
 
     <!-- 4 COLUMNAS A ANCHO COMPLETO -->
-    <div style="display:grid;grid-template-columns:repeat(4,1fr);" id="viñetas-grid" class="viñetas-grid-wrap">
+    <div id="viñetas-grid" class="viñetas-grid-wrap">
 
         <!-- ROJO -->
         <div class="viñeta-col" style="background:#c0392b;border-radius:20px 0 0 0;">
@@ -949,21 +952,6 @@ function acceptCookies() { localStorage.setItem('cookies_coto', 'accepted'); hid
 function rejectCookies() { localStorage.setItem('cookies_coto', 'rejected'); hideCookieBanner(); }
 window.addEventListener('load', showCookieBanner);
 
-// MÓVIL: viñetas en 1 columna (4 filas), desktop en 4 columnas
-function fixViñetas() {
-    var grid = document.getElementById('viñetas-grid');
-    if (!grid) return;
-    if (window.innerWidth <= 768) {
-        grid.style.setProperty('grid-template-columns', '1fr', 'important');
-    } else {
-        grid.style.setProperty('grid-template-columns', 'repeat(4,1fr)', 'important');
-    }
-}
-document.addEventListener('DOMContentLoaded', fixViñetas);
-window.addEventListener('load', fixViñetas);
-window.addEventListener('resize', fixViñetas);
-setTimeout(fixViñetas, 50);
-setTimeout(fixViñetas, 300);
 
 // ESC cierra todo
 document.addEventListener('keydown', e => {
