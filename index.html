@@ -274,6 +274,8 @@
             display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-top: 0;
         }
         .contacto-card {
+            background: var(--amarillo) !important;
+            color: var(--oscuro) !important;
             background: rgba(255,255,255,0.08); border-radius: 16px; padding: 24px;
             text-decoration: none; color: white; transition: background 0.2s; text-align: center;
         }
@@ -742,6 +744,51 @@
 
     </div>
 </section>
+
+<!-- GALERÍA DE FOTOS -->
+<section id="galeria" style="padding:60px 5%;background:#f8f9fb;">
+    <div style="max-width:1200px;margin:0 auto;">
+        <div class="galeria-section reveal">
+            <p class="galeria-title">📸 Nuestras instalaciones</p>
+            <div class="galeria-wrap">
+                <div class="galeria-track">
+                    <div class="galeria-item" style="background:#eee;" onclick="openLightbox('01.jpg')"><img src="01.jpg" style="width:100%;height:100%;object-fit:cover;border-radius:16px;"><div class="overlay"><span class="overlay-icon">🔍</span></div></div>
+                    <div class="galeria-item" style="background:#eee;" onclick="openLightbox('02.jpg')"><img src="02.jpg" style="width:100%;height:100%;object-fit:cover;border-radius:16px;"><div class="overlay"><span class="overlay-icon">🔍</span></div></div>
+                    <div class="galeria-item" style="background:#eee;" onclick="openLightbox('03.jpg')"><img src="03.jpg" style="width:100%;height:100%;object-fit:cover;border-radius:16px;"><div class="overlay"><span class="overlay-icon">🔍</span></div></div>
+                    <div class="galeria-item" style="background:#eee;" onclick="openLightbox('04.jpg')"><img src="04.jpg" style="width:100%;height:100%;object-fit:cover;border-radius:16px;"><div class="overlay"><span class="overlay-icon">🔍</span></div></div>
+                    <div class="galeria-item" style="background:#eee;" onclick="openLightbox('05.jpg')"><img src="05.jpg" style="width:100%;height:100%;object-fit:cover;border-radius:16px;"><div class="overlay"><span class="overlay-icon">🔍</span></div></div>
+                    <div class="galeria-item" style="background:#eee;" onclick="openLightbox('06.jpg')"><img src="06.jpg" style="width:100%;height:100%;object-fit:cover;border-radius:16px;"><div class="overlay"><span class="overlay-icon">🔍</span></div></div>
+                    <div class="galeria-item" style="background:#eee;" onclick="openLightbox('07.jpg')"><img src="07.jpg" style="width:100%;height:100%;object-fit:cover;border-radius:16px;"><div class="overlay"><span class="overlay-icon">🔍</span></div></div>
+                    <div class="galeria-item" style="background:#eee;" onclick="openLightbox('08.jpg')"><img src="08.jpg" style="width:100%;height:100%;object-fit:cover;border-radius:16px;"><div class="overlay"><span class="overlay-icon">🔍</span></div></div>
+                    <div class="galeria-item" style="background:#eee;" onclick="openLightbox('09.jpg')"><img src="09.jpg" style="width:100%;height:100%;object-fit:cover;border-radius:16px;"><div class="overlay"><span class="overlay-icon">🔍</span></div></div>
+                    <div class="galeria-item" style="background:#eee;" onclick="openLightbox('010.jpg')"><img src="010.jpg" style="width:100%;height:100%;object-fit:cover;border-radius:16px;"><div class="overlay"><span class="overlay-icon">🔍</span></div></div>
+                    <div class="galeria-item" style="background:#eee;" onclick="openLightbox('011.jpg')"><img src="011.jpg" style="width:100%;height:100%;object-fit:cover;border-radius:16px;"><div class="overlay"><span class="overlay-icon">🔍</span></div></div>
+                    <div class="galeria-item" style="background:#eee;" onclick="openLightbox('012.jpg')"><img src="012.jpg" style="width:100%;height:100%;object-fit:cover;border-radius:16px;"><div class="overlay"><span class="overlay-icon">🔍</span></div></div>
+                    <div class="galeria-item" style="background:#eee;" onclick="openLightbox('013.jpg')"><img src="013.jpg" style="width:100%;height:100%;object-fit:cover;border-radius:16px;"><div class="overlay"><span class="overlay-icon">🔍</span></div></div>
+                    <div class="galeria-item" style="background:#eee;" onclick="openLightbox('014.jpg')"><img src="014.jpg" style="width:100%;height:100%;object-fit:cover;border-radius:16px;"><div class="overlay"><span class="overlay-icon">🔍</span></div></div>
+                    <div class="galeria-item" style="background:#eee;" onclick="openLightbox('015.jpg')"><img src="015.jpg" style="width:100%;height:100%;object-fit:cover;border-radius:16px;"><div class="overlay"><span class="overlay-icon">🔍</span></div></div>
+                    <div class="galeria-item" style="background:#eee;" onclick="openLightbox('016.jpg')"><img src="016.jpg" style="width:100%;height:100%;object-fit:cover;border-radius:16px;"><div class="overlay"><span class="overlay-icon">🔍</span></div></div>
+                    <!-- duplicados para bucle continuo -->
+                    <div class="galeria-item" style="background:#eee;" onclick="openLightbox('01.jpg')"><img src="01.jpg" style="width:100%;height:100%;object-fit:cover;border-radius:16px;"><div class="overlay"><span class="overlay-icon">🔍</span></div></div>
+                    <div class="galeria-item" style="background:#eee;" onclick="openLightbox('02.jpg')"><img src="02.jpg" style="width:100%;height:100%;object-fit:cover;border-radius:16px;"><div class="overlay"><span class="overlay-icon">🔍</span></div></div>
+                    <div class="galeria-item" style="background:#eee;" onclick="openLightbox('03.jpg')"><img src="03.jpg" style="width:100%;height:100%;object-fit:cover;border-radius:16px;"><div class="overlay"><span class="overlay-icon">🔍</span></div></div>
+                    <div class="galeria-item" style="background:#eee;" onclick="openLightbox('04.jpg')"><img src="04.jpg" style="width:100%;height:100%;object-fit:cover;border-radius:16px;"><div class="overlay"><span class="overlay-icon">🔍</span></div></div>
+                    <div class="galeria-item" style="background:#eee;" onclick="openLightbox('05.jpg')"><img src="05.jpg" style="width:100%;height:100%;object-fit:cover;border-radius:16px;"><div class="overlay"><span class="overlay-icon">🔍</span></div></div>
+                    <div class="galeria-item" style="background:#eee;" onclick="openLightbox('06.jpg')"><img src="06.jpg" style="width:100%;height:100%;object-fit:cover;border-radius:16px;"><div class="overlay"><span class="overlay-icon">🔍</span></div></div>
+                </div>
+            </div>
+            <p style="text-align:center;font-size:13px;color:var(--gris-texto);margin-top:12px;">Pasa el ratón para pausar · Haz click para ampliar</p>
+        </div>
+        <!-- LIGHTBOX -->
+        <div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+            <div class="lightbox-box">
+                <button class="lightbox-close" onclick="document.getElementById('lightbox').classList.remove('open')">✕</button>
+                <span id="lightbox-content"></span>
+            </div>
+        </div>
+    </div>
+</section>
+
 <style>
 @media(max-width:900px){
     #servicios > div:first-child > div:first-child{grid-template-columns:1fr!important;}
@@ -850,7 +897,7 @@
 <section id="contacto">
     <div class="section-eyebrow">Contacto</div>
     <h2 class="section-title">¿Hablamos?</h2>
-    <p class="section-sub" style="margin-bottom:40px;">¿Quieres saber más sobre la guardería o reservar una visita? Estamos encantadas de atenderte.</p>
+    <p class="section-sub" style="margin-bottom:40px;">¿Quieres saber más sobre el centro o reservar una visita? Estamos encantadas de atenderte.</p>
     <div class="contacto-grid">
         <a href="tel:+34622120613" class="contacto-card">
             <div class="icon">📞</div>
