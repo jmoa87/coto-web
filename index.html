@@ -282,7 +282,8 @@
         .contacto-card:hover { background: rgba(255,255,255,0.15); }
         .contacto-card .icon { font-size: 28px; margin-bottom: 10px; }
         .contacto-card .label { font-size: 13px; color: var(--oscuro); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; font-weight: 800; }
-        .contacto-card .valor { font-size: 18px; font-weight: 900; color: var(--oscuro); }
+        .contacto-card .valor { font-size: 18px; font-weight: 900; color: var(--oscuro); word-break: break-all; }
+        .contacto-card .valor.valor-email { font-size: 13px; }
 
         /* FOOTER */
         footer { background: var(--oscuro); color: rgba(255,255,255,0.6); padding: 40px 5% 24px; }
@@ -907,7 +908,7 @@
         <a href="mailto:elcotodelospeques@hotmail.com" class="contacto-card">
             <div class="icon">✉️</div>
             <div class="label">Email</div>
-            <div class="valor">elcotodelospeques@hotmail.com</div>
+            <div class="valor valor-email">elcotodelospeques@hotmail.com</div>
         </a>
         <a href="#" class="contacto-card">
             <div class="icon">📍</div>
