@@ -398,10 +398,13 @@
         }
         .galeria-wrap:hover .galeria-track { animation-play-state: paused; }
         .galeria-item {
-            width: 220px; height: 160px; border-radius: 16px; flex-shrink: 0;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 48px; cursor: pointer; transition: transform 0.3s, box-shadow 0.3s;
-            position: relative; overflow: hidden;
+            width: 260px; height: 180px; border-radius: 16px; flex-shrink: 0;
+            cursor: pointer; transition: transform 0.3s, box-shadow 0.3s;
+            position: relative; overflow: hidden; background: #ccc;
+        }
+        .galeria-item img {
+            width: 100%; height: 100%; object-fit: cover; display: block;
+            border-radius: 16px;
         }
         .galeria-item:hover { transform: scale(1.05); box-shadow: 0 12px 40px rgba(0,0,0,0.15); }
         .galeria-item .overlay {
@@ -708,7 +711,7 @@
             <h3 style="color:white;font-size:22px;font-weight:800;margin:0 0 16px;">¿Qué ofrecemos?</h3>
             <ul style="color:rgba(255,255,255,0.92);font-size:16px;line-height:1.85;margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:6px;">
                 <li>🏫 Instalaciones adaptadas, aulas por edades, climatizadas, luminosas, gran patio y aparcamiento</li>
-                <li>🍽️ Cocina propia con menús sanos adaptados a alergias y dietas especiales</li>
+                <li style="font-weight:900;font-size:18px;text-transform:uppercase;letter-spacing:0.3px;">🍽️ Cocina propia con menús sanos adaptados a alergias y dietas especiales</li>
                 <li>⏰ Horario flexible para conciliar</li>
                 <li>🎮 Educación a través del juego y la estimulación</li>
                 <li>❤️ Educación emocional y desarrollo de la autonomía</li>
