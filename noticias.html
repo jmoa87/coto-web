@@ -11,8 +11,8 @@
             --amarillo-claro: #FDE87C; --gris: #F7F8FC; --gris-texto: #6b7280; --oscuro: #1a2060;
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
-        body { font-family: 'Nunito', sans-serif; color: var(--oscuro); background: var(--gris); }
+        html, body { min-height: 100%; } html { scroll-behavior: smooth; }
+        body { font-family: 'Nunito', sans-serif; color: var(--oscuro); background: var(--gris); margin: 0; }
         nav {
             position: fixed; top: 0; left: 0; right: 0; z-index: 100;
             background: rgba(255,255,255,0.96); backdrop-filter: blur(12px);
@@ -89,7 +89,7 @@
             .header-noticias h1 { font-size: 28px; }
             .admin-bar { flex-direction: column; align-items: flex-start; }
         }
-        footer { background: var(--azul); color: rgba(255,255,255,0.6); padding: 32px 5%; text-align: center; }
+        footer { background: var(--azul); color: rgba(255,255,255,0.6); padding: 32px 5%; text-align: center; margin: 0; }
         footer a { color: var(--amarillo); text-decoration: none; font-size: 13px; font-weight: 700; }
         @media (max-width: 768px) {
             .footer-inner { flex-direction: column; text-align: center; }
@@ -160,34 +160,38 @@ function closeModal(e) {
 }
 
 async function cargarNoticias() {
-    const lista = document.getElementById('listaNoticias');
+    var lista = document.getElementById('listaNoticias');
     try {
-        const r = await fetch(`${SUPA_URL}/rest/v1/noticias_coto?order=fecha.desc`, { headers: HEADERS });
-        const noticias = await r.json();
+        var r = await fetch(SUPA_URL + '/rest/v1/noticias_coto?order=fecha.desc', { headers: HEADERS });
+        var noticias = await r.json();
         if (!noticias || noticias.length === 0) {
             lista.innerHTML = '<div class="empty-state"><div class="icon">📭</div>Todavía no hay noticias publicadas.</div>';
             return;
         }
-        lista.innerHTML = noticias.map(n => {
-            const fecha = new Date(n.fecha).toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' });
-            const imgHtml = n.imagen_url
-                ? `<div class="noticia-img-wrap"><img src="${n.imagen_url}" alt="${n.titulo}"></div>`
-                : '<div class="noticia-img-wrap">📰</div>';
-            const textoCorto = n.texto.length > 100 ? n.texto.slice(0,100) + '…' : n.texto;
-            return `
-            <div class="noticia-item" onclick="openModal(${JSON.stringify(n.titulo)},${JSON.stringify(n.texto)},${JSON.stringify(n.imagen_url||'')},${JSON.stringify(fecha)})">
-                ${imgHtml}
-                <div class="noticia-content">
-                    <div class="noticia-meta">
-                        <span class="noticia-fecha">${fecha}</span>
-                    </div>
-                    <h2>${n.titulo}</h2>
-                    <p>${textoCorto}</p>
-                </div>
-            </div>`;
-        }).join('');
+        var html = '';
+        for (var i = 0; i < noticias.length; i++) {
+            var n = noticias[i];
+            var fecha = new Date(n.fecha).toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' });
+            var imgHtml = n.imagen_url
+                ? '<div class="noticia-img-wrap"><img src="' + n.imagen_url + '" alt="' + n.titulo + '"></div>'
+                : '<div class="noticia-img-wrap" style="display:flex;align-items:center;justify-content:center;font-size:48px;">📰</div>';
+            var textoCorto = n.texto.length > 100 ? n.texto.slice(0,100) + '…' : n.texto;
+            var tituloEsc = JSON.stringify(n.titulo);
+            var textoEsc = JSON.stringify(n.texto);
+            var imgEsc = JSON.stringify(n.imagen_url || '');
+            var fechaEsc = JSON.stringify(fecha);
+            html += '<div class="noticia-item" onclick="openModal(' + tituloEsc + ',' + textoEsc + ',' + imgEsc + ',' + fechaEsc + ')">'
+                + imgHtml
+                + '<div class="noticia-content">'
+                + '<div class="noticia-meta"><span class="noticia-fecha">' + fecha + '</span></div>'
+                + '<h2>' + n.titulo + '</h2>'
+                + '<p>' + textoCorto + '</p>'
+                + '</div></div>';
+        }
+        lista.innerHTML = html;
     } catch(e) {
         lista.innerHTML = '<div class="empty-state"><div class="icon">❌</div>No se pudieron cargar las noticias.</div>';
+        console.error(e);
     }
 }
 
