@@ -42,20 +42,6 @@
         .header-noticias h1 { font-size: 40px; font-weight: 900; color: white; margin-bottom: 10px; }
         .header-noticias p { font-size: 16px; color: rgba(255,255,255,0.75); }
 
-        .admin-bar {
-            background: var(--oscuro); padding: 14px 5%;
-            display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;
-        }
-        .admin-bar span { color: rgba(255,255,255,0.7); font-size: 13px; font-weight: 600; }
-        .admin-btns { display: flex; gap: 10px; flex-wrap: wrap; }
-        .btn-admin {
-            padding: 9px 18px; border-radius: 50px; font-weight: 800; font-size: 13px;
-            border: none; cursor: pointer; transition: transform 0.2s, opacity 0.2s;
-        }
-        .btn-admin:hover { transform: scale(1.05); opacity: 0.9; }
-        .btn-nueva { background: var(--amarillo); color: var(--oscuro); }
-        .btn-banner-on  { background: #22c55e; color: white; }
-        .btn-banner-off { background: #ef4444; color: white; }
 
         .noticias-container { max-width: 900px; margin: 0 auto; padding: 48px 24px 80px; }
         .noticias-lista { display: flex; flex-direction: column; gap: 24px; }
@@ -74,68 +60,9 @@
         .noticia-fecha { font-size: 12px; color: var(--azul-claro); font-weight: 800; text-transform: uppercase; letter-spacing: 1px; }
         .noticia-content h2 { font-size: 18px; font-weight: 900; margin-bottom: 8px; }
         .noticia-content p { font-size: 14px; color: var(--gris-texto); line-height: 1.7; }
-        .noticia-actions { padding: 12px 24px 20px; display: flex; gap: 10px; }
-        .btn-editar, .btn-eliminar {
-            padding: 7px 16px; border-radius: 50px; font-weight: 800; font-size: 13px;
-            border: none; cursor: pointer; transition: transform 0.15s;
-        }
-        .btn-editar:hover, .btn-eliminar:hover { transform: scale(1.05); }
-        .btn-editar { background: var(--azul-claro); color: white; }
-        .btn-eliminar { background: #fee2e2; color: #dc2626; }
 
         .empty-state { text-align: center; padding: 60px 20px; color: var(--gris-texto); font-size: 15px; }
         .empty-state .icon { font-size: 48px; margin-bottom: 12px; }
-
-        /* Modal */
-        .modal-overlay {
-            display: none; position: fixed; inset: 0;
-            background: rgba(0,0,0,0.6); z-index: 9999;
-            align-items: center; justify-content: center;
-            backdrop-filter: blur(4px); padding: 24px;
-        }
-        .modal-overlay.open { display: flex; }
-        .modal-box {
-            background: white; border-radius: 24px; width: 100%; max-width: 540px;
-            max-height: 90vh; overflow-y: auto; padding: 32px;
-        }
-        .modal-box h3 { font-size: 20px; font-weight: 900; margin-bottom: 24px; color: var(--oscuro); }
-        .form-group { margin-bottom: 18px; }
-        .form-group label { display: block; font-size: 13px; font-weight: 800; color: var(--gris-texto); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
-        .form-group input, .form-group textarea {
-            width: 100%; padding: 12px 16px; border: 2px solid #e5e7eb; border-radius: 12px;
-            font-family: 'Nunito', sans-serif; font-size: 15px; color: var(--oscuro);
-            transition: border-color 0.2s;
-        }
-        .form-group input:focus, .form-group textarea:focus { outline: none; border-color: var(--azul); }
-        .form-group textarea { min-height: 120px; resize: vertical; }
-        .form-group input[type=file] { padding: 10px; cursor: pointer; }
-        .img-preview { margin-top: 10px; width: 100%; max-height: 180px; object-fit: cover; border-radius: 10px; display: none; }
-        .modal-btns { display: flex; gap: 12px; margin-top: 8px; }
-        .btn-guardar {
-            flex: 1; padding: 13px; background: var(--azul); color: white;
-            border: none; border-radius: 50px; font-weight: 900; font-size: 15px;
-            cursor: pointer; transition: opacity 0.2s;
-        }
-        .btn-guardar:hover { opacity: 0.85; }
-        .btn-guardar:disabled { opacity: 0.5; cursor: not-allowed; }
-        .btn-cancelar {
-            padding: 13px 24px; background: #f3f4f6; color: var(--gris-texto);
-            border: none; border-radius: 50px; font-weight: 800; font-size: 15px;
-            cursor: pointer;
-        }
-
-        footer { background: var(--azul); color: rgba(255,255,255,0.6); padding: 32px 5%; text-align: center; }
-        footer a { color: var(--amarillo); text-decoration: none; font-size: 13px; font-weight: 600; }
-        .footer-promo { margin-top: 12px; }
-
-        .toast {
-            position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
-            background: var(--oscuro); color: white; padding: 12px 24px;
-            border-radius: 50px; font-weight: 700; font-size: 14px;
-            z-index: 99999; opacity: 0; transition: opacity 0.3s;
-            pointer-events: none;
-        }
-        .toast.show { opacity: 1; }
 
         @media (max-width: 600px) {
             .header-noticias h1 { font-size: 28px; }
@@ -158,14 +85,6 @@
     <p>Novedades y actividades del centro</p>
 </div>
 
-<div class="admin-bar">
-    <span>✏️ Gestión de contenido</span>
-    <div class="admin-btns">
-        <button class="btn-admin btn-nueva" onclick="abrirFormulario()">➕ Subir noticia</button>
-        <button class="btn-admin btn-banner-on" id="btnBanner" onclick="toggleBanner()">🏫 Añadir Banner Plazas</button>
-    </div>
-</div>
-
 <div class="noticias-container">
     <div class="noticias-lista" id="listaNoticias">
         <div class="empty-state"><div class="icon">⏳</div>Cargando noticias…</div>
@@ -177,246 +96,46 @@
     <div class="footer-promo"><a href="https://wkit.app" target="_blank">Hecho con Wkit</a></div>
 </footer>
 
-<!-- Modal subir/editar -->
-<div class="modal-overlay" id="modalForm" onclick="cerrarModalFuera(event)">
-    <div class="modal-box">
-        <h3 id="modalTitulo">➕ Nueva noticia</h3>
-        <div class="form-group">
-            <label>Título</label>
-            <input type="text" id="fTitulo" placeholder="Título de la noticia">
-        </div>
-        <div class="form-group">
-            <label>Texto</label>
-            <textarea id="fTexto" placeholder="Escribe aquí el contenido de la noticia…"></textarea>
-        </div>
-        <div class="form-group">
-            <label>Imagen (opcional)</label>
-            <input type="file" id="fImagen" accept="image/*" onchange="previewImagen()">
-            <img id="imgPreview" class="img-preview" alt="Preview">
-        </div>
-        <div class="modal-btns">
-            <button class="btn-cancelar" onclick="cerrarModal()">Cancelar</button>
-            <button class="btn-guardar" id="btnGuardar" onclick="guardarNoticia()">Guardar</button>
-        </div>
-    </div>
-</div>
-
-<div class="toast" id="toast"></div>
 
 <script>
 const SUPA_URL  = 'https://kcshvhekcofydsaoxgyn.supabase.co';
 const SUPA_KEY  = 'sb_publishable_KVE7FKtabvpRwXnheCHIJw_xP0aoRxP';
-const HEADERS   = { 'apikey': SUPA_KEY, 'Authorization': 'Bearer ' + SUPA_KEY, 'Content-Type': 'application/json', 'Prefer': 'return=representation' };
-const BUCKET    = 'noticias-coto';
+const HEADERS   = { 'apikey': SUPA_KEY, 'Authorization': 'Bearer ' + SUPA_KEY };
 
-let editandoId = null;
-let bannerActivo = false;
-
-// ── TOAST ──────────────────────────────────────────────
-function toast(msg, ms = 2500) {
-    const t = document.getElementById('toast');
-    t.textContent = msg;
-    t.classList.add('show');
-    setTimeout(() => t.classList.remove('show'), ms);
-}
-
-// ── BANNER ─────────────────────────────────────────────
-async function cargarBanner() {
-    try {
-        const r = await fetch(`${SUPA_URL}/rest/v1/banner_coto?id=eq.1`, { headers: HEADERS });
-        const data = await r.json();
-        if (data && data[0]) {
-            bannerActivo = data[0].activo;
-            actualizarBtnBanner();
-        }
-    } catch(e) {}
-}
-
-function actualizarBtnBanner() {
-    const btn = document.getElementById('btnBanner');
-    if (bannerActivo) {
-        btn.textContent = '🔴 Desactivar Banner Plazas';
-        btn.className = 'btn-admin btn-banner-off';
-    } else {
-        btn.textContent = '🏫 Añadir Banner Plazas';
-        btn.className = 'btn-admin btn-banner-on';
-    }
-}
-
-async function toggleBanner() {
-    bannerActivo = !bannerActivo;
-    actualizarBtnBanner();
-    try {
-        await fetch(`${SUPA_URL}/rest/v1/banner_coto?id=eq.1`, {
-            method: 'PATCH',
-            headers: HEADERS,
-            body: JSON.stringify({ activo: bannerActivo, updated_at: new Date().toISOString() })
-        });
-        toast(bannerActivo ? '✅ Banner activado' : '✅ Banner desactivado');
-    } catch(e) {
-        toast('❌ Error al actualizar el banner');
-        bannerActivo = !bannerActivo;
-        actualizarBtnBanner();
-    }
-}
-
-// ── CARGAR NOTICIAS ────────────────────────────────────
 async function cargarNoticias() {
     const lista = document.getElementById('listaNoticias');
     try {
         const r = await fetch(`${SUPA_URL}/rest/v1/noticias_coto?order=fecha.desc`, { headers: HEADERS });
         const noticias = await r.json();
         if (!noticias || noticias.length === 0) {
-            lista.innerHTML = '<div class="empty-state"><div class="icon">📭</div>Todavía no hay noticias. ¡Sube la primera!</div>';
+            lista.innerHTML = '<div class="empty-state"><div class="icon">📭</div>Todavía no hay noticias publicadas.</div>';
             return;
         }
-        lista.innerHTML = noticias.map(n => tarjetaNoticia(n)).join('');
+        lista.innerHTML = noticias.map(n => {
+            const fecha = new Date(n.fecha).toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' });
+            const imgHtml = n.imagen_url
+                ? `<div class="noticia-img-wrap"><img src="${n.imagen_url}" alt="${n.titulo}"></div>`
+                : '';
+            return `
+            <div class="noticia-item">
+                ${imgHtml}
+                <div class="noticia-content">
+                    <div class="noticia-meta">
+                        <span class="noticia-fecha">${fecha}</span>
+                    </div>
+                    <h2>${n.titulo}</h2>
+                    <p>${n.texto}</p>
+                </div>
+            </div>`;
+        }).join('');
     } catch(e) {
         lista.innerHTML = '<div class="empty-state"><div class="icon">❌</div>No se pudieron cargar las noticias.</div>';
     }
 }
 
-function tarjetaNoticia(n) {
-    const fecha = new Date(n.fecha).toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' });
-    const imgHtml = n.imagen_url
-        ? `<div class="noticia-img-wrap"><img src="${n.imagen_url}" alt="${n.titulo}"></div>`
-        : '';
-    const textoCorto = n.texto.length > 180 ? n.texto.slice(0, 180) + '…' : n.texto;
-    return `
-    <div class="noticia-item" id="n-${n.id}">
-        ${imgHtml}
-        <div class="noticia-content">
-            <div class="noticia-meta">
-                <span class="noticia-fecha">${fecha}</span>
-            </div>
-            <h2>${n.titulo}</h2>
-            <p>${textoCorto}</p>
-        </div>
-        <div class="noticia-actions">
-            <button class="btn-editar" onclick="abrirEditar('${n.id}','${encodeURIComponent(n.titulo)}','${encodeURIComponent(n.texto)}','${n.imagen_url||''}')">✏️ Editar</button>
-            <button class="btn-eliminar" onclick="eliminarNoticia('${n.id}')">🗑️ Eliminar</button>
-        </div>
-    </div>`;
-}
-
-// ── FORMULARIO ─────────────────────────────────────────
-function abrirFormulario() {
-    editandoId = null;
-    document.getElementById('modalTitulo').textContent = '➕ Nueva noticia';
-    document.getElementById('fTitulo').value = '';
-    document.getElementById('fTexto').value = '';
-    document.getElementById('fImagen').value = '';
-    document.getElementById('imgPreview').style.display = 'none';
-    document.getElementById('modalForm').classList.add('open');
-    document.body.style.overflow = 'hidden';
-}
-
-function abrirEditar(id, titulo, texto, imagenUrl) {
-    editandoId = id;
-    document.getElementById('modalTitulo').textContent = '✏️ Editar noticia';
-    document.getElementById('fTitulo').value = decodeURIComponent(titulo);
-    document.getElementById('fTexto').value = decodeURIComponent(texto);
-    document.getElementById('fImagen').value = '';
-    const prev = document.getElementById('imgPreview');
-    if (imagenUrl) { prev.src = imagenUrl; prev.style.display = 'block'; }
-    else { prev.style.display = 'none'; }
-    document.getElementById('modalForm').classList.add('open');
-    document.body.style.overflow = 'hidden';
-}
-
-function cerrarModal() {
-    document.getElementById('modalForm').classList.remove('open');
-    document.body.style.overflow = '';
-}
-function cerrarModalFuera(e) {
-    if (e.target === document.getElementById('modalForm')) cerrarModal();
-}
-
-function previewImagen() {
-    const file = document.getElementById('fImagen').files[0];
-    if (!file) return;
-    const prev = document.getElementById('imgPreview');
-    prev.src = URL.createObjectURL(file);
-    prev.style.display = 'block';
-}
-
-// ── GUARDAR ────────────────────────────────────────────
-async function guardarNoticia() {
-    const titulo = document.getElementById('fTitulo').value.trim();
-    const texto  = document.getElementById('fTexto').value.trim();
-    const file   = document.getElementById('fImagen').files[0];
-
-    if (!titulo || !texto) { toast('⚠️ Título y texto son obligatorios'); return; }
-
-    const btn = document.getElementById('btnGuardar');
-    btn.disabled = true;
-    btn.textContent = 'Guardando…';
-
-    try {
-        let imagen_url = null;
-
-        // Si hay imagen nueva, subirla al bucket
-        if (file) {
-            const ext = file.name.split('.').pop();
-            const nombre = `${Date.now()}.${ext}`;
-            const upRes = await fetch(`${SUPA_URL}/storage/v1/object/${BUCKET}/${nombre}`, {
-                method: 'POST',
-                headers: { 'apikey': SUPA_KEY, 'Authorization': 'Bearer ' + SUPA_KEY, 'Content-Type': file.type, 'x-upsert': 'true' },
-                body: file
-            });
-            if (!upRes.ok) throw new Error('Error subiendo imagen');
-            imagen_url = `${SUPA_URL}/storage/v1/object/public/${BUCKET}/${nombre}`;
-        }
-
-        if (editandoId) {
-            // Editar
-            const body = { titulo, texto };
-            if (imagen_url) body.imagen_url = imagen_url;
-            const r = await fetch(`${SUPA_URL}/rest/v1/noticias_coto?id=eq.${editandoId}`, {
-                method: 'PATCH', headers: HEADERS, body: JSON.stringify(body)
-            });
-            if (!r.ok) throw new Error('Error al editar');
-            toast('✅ Noticia editada');
-        } else {
-            // Nueva
-            const body = { titulo, texto };
-            if (imagen_url) body.imagen_url = imagen_url;
-            const r = await fetch(`${SUPA_URL}/rest/v1/noticias_coto`, {
-                method: 'POST', headers: HEADERS, body: JSON.stringify(body)
-            });
-            if (!r.ok) throw new Error('Error al crear');
-            toast('✅ Noticia publicada');
-        }
-
-        cerrarModal();
-        cargarNoticias();
-    } catch(e) {
-        toast('❌ ' + e.message);
-    } finally {
-        btn.disabled = false;
-        btn.textContent = 'Guardar';
-    }
-}
-
-// ── ELIMINAR ───────────────────────────────────────────
-async function eliminarNoticia(id) {
-    if (!confirm('¿Seguro que quieres eliminar esta noticia?')) return;
-    try {
-        const r = await fetch(`${SUPA_URL}/rest/v1/noticias_coto?id=eq.${id}`, {
-            method: 'DELETE', headers: HEADERS
-        });
-        if (!r.ok) throw new Error('Error al eliminar');
-        toast('🗑️ Noticia eliminada');
-        cargarNoticias();
-    } catch(e) {
-        toast('❌ ' + e.message);
-    }
-}
-
-// ── INIT ───────────────────────────────────────────────
-document.addEventListener('keydown', e => { if (e.key === 'Escape') cerrarModal(); });
-cargarBanner();
 cargarNoticias();
+
 </script>
+
 </body>
 </html>
