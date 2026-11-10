@@ -500,7 +500,7 @@
             display: inline-flex; align-items: center; gap: 8px;
             background: transparent; border: 2.5px solid var(--azul);
             color: var(--azul); padding: 12px 28px; border-radius: 50px;
-            font-size: 15px; font-weight: 800; text-decoration: none;
+            font-size: 16px; font-weight: 800; text-decoration: none;
             transition: background 0.25s, color 0.25s, transform 0.25s, box-shadow 0.25s;
         }
         .btn-ver-mas:hover {
@@ -579,17 +579,19 @@
         /* BANNER INSCRIPCIONES PLAZAS */
         #banner-plazas {
             display: none;
-            background: #F5C518;
-            color: #1a2060;
+            background: #fff0f0;
+            border: 2px solid #c0000a;
+            color: #c0000a;
             text-align: center;
-            padding: 14px 28px;
+            padding: 18px 48px;
             font-family: 'Nunito', sans-serif;
-            font-size: 15px;
+            font-size: 16px;
             font-weight: 900;
             letter-spacing: 0.5px;
             border-radius: 50px;
             margin-top: 20px;
-            width: fit-content;
+            width: min(680px, 90%);
+            box-shadow: 0 6px 24px rgba(192,0,10,0.25);
         }
         #banner-plazas.visible { display: inline-block; }
 </style>
