@@ -11,8 +11,8 @@
             --amarillo-claro: #FDE87C; --gris: #F7F8FC; --gris-texto: #6b7280; --oscuro: #1a2060;
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        html, body { min-height: 100%; } html { scroll-behavior: smooth; }
-        body { font-family: 'Nunito', sans-serif; color: var(--oscuro); background: var(--gris); margin: 0; }
+        html { scroll-behavior: smooth; height: 100%; }
+        body { font-family: 'Nunito', sans-serif; color: var(--oscuro); background: var(--gris); margin: 0; min-height: 100vh; display: flex; flex-direction: column; }
         nav {
             position: fixed; top: 0; left: 0; right: 0; z-index: 100;
             background: rgba(255,255,255,0.96); backdrop-filter: blur(12px);
@@ -43,7 +43,7 @@
         .header-noticias p { font-size: 16px; color: rgba(255,255,255,0.75); }
 
 
-        .noticias-container { max-width: 1100px; margin: 0 auto; padding: 48px 24px 80px; }
+        .noticias-container { max-width: 1100px; margin: 0 auto; padding: 48px 24px 80px; flex: 1; width: 100%; }
         .noticias-lista {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
