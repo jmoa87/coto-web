@@ -575,7 +575,24 @@
         @media (max-width: 1024px) and (min-width: 769px) {
 
         }
-        </style>
+        
+        /* BANNER INSCRIPCIONES PLAZAS */
+        #banner-plazas {
+            display: none;
+            background: #F5C518;
+            color: #1a2060;
+            text-align: center;
+            padding: 14px 24px;
+            font-family: 'Nunito', sans-serif;
+            font-size: 16px;
+            font-weight: 900;
+            letter-spacing: 0.5px;
+            border-bottom: 3px solid #d4a800;
+            z-index: 50;
+            position: relative;
+        }
+        #banner-plazas.visible { display: block; }
+</style>
 </head>
 <body>
 
@@ -615,6 +632,7 @@
     </div>
     </div>
     </div>
+    <div id="banner-plazas">🏫 ABIERTAS LAS INSCRIPCIONES PARA LOS NIÑOS EN EL CENTRO</div>
     <svg class="hero-wave" viewBox="0 0 1440 80" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M0,40 C360,80 1080,0 1440,40 L1440,80 L0,80 Z" fill="white"/>
     </svg>
@@ -863,34 +881,8 @@
     <div class="section-eyebrow">Novedades</div>
     <h2 class="section-title">Últimas noticias</h2>
     <p class="section-sub">Aquí compartimos las aventuras, actividades y momentos especiales de El Coto de los Peques.</p>
-    <div class="noticias-grid">
-        <div class="noticia-card reveal" onclick="openModal('🎃','28 octubre 2026','Celebramos Halloween con los peques','Una tarde llena de disfraces, risas y actividades creativas para celebrar juntos esta divertida festividad. Los peques se disfrazaron de sus personajes favoritos y disfrutaron de juegos, canciones y mucha diversión. Fue un día para recordar.','Actividades')">
-            <div class="noticia-img">🎃</div>
-            <div class="noticia-body">
-                <div class="noticia-fecha">28 octubre 2026</div>
-                <h3>Celebramos Halloween con los peques</h3>
-                <p>Una tarde llena de disfraces, risas y actividades creativas para celebrar juntos esta divertida festividad.</p>
-                <span class="noticia-tag">Actividades</span>
-            </div>
-        </div>
-        <div class="noticia-card reveal" style="transition-delay:0.15s" onclick="openModal('🍂','15 septiembre 2026','¡Bienvenidos al nuevo curso!','Comenzamos el curso con mucha energía y nuevas actividades pensadas para el desarrollo de nuestros peques. Este año estrenamos nuevas zonas de juego y actividades de estimulación temprana. ¡Estamos muy emocionadas!','Curso')">
-            <div class="noticia-img">🍂</div>
-            <div class="noticia-body">
-                <div class="noticia-fecha">15 septiembre 2026</div>
-                <h3>¡Bienvenidos al nuevo curso!</h3>
-                <p>Comenzamos el curso con mucha energía y nuevas actividades pensadas para el desarrollo de nuestros peques.</p>
-                <span class="noticia-tag">Curso</span>
-            </div>
-        </div>
-        <div class="noticia-card reveal" style="transition-delay:0.3s" onclick="openModal('☀️','20 junio 2026','Fiesta de fin de curso','Celebramos el final del curso con una fiesta especial para los peques y sus familias. Hubo actuaciones, bailes, merienda y mucha emoción. ¡Fue un día increíble lleno de recuerdos para todos!','Eventos')">
-            <div class="noticia-img">☀️</div>
-            <div class="noticia-body">
-                <div class="noticia-fecha">20 junio 2026</div>
-                <h3>Fiesta de fin de curso</h3>
-                <p>Celebramos el final del curso con una fiesta especial para los peques y sus familias. ¡Fue un día increíble!</p>
-                <span class="noticia-tag">Eventos</span>
-            </div>
-        </div>
+    <div class="noticias-grid" id="noticias-grid-home">
+        <p id="noticias-loading" style="color:#6b7280;font-size:14px;">Cargando noticias…</p>
     </div>
     <div class="ver-mas-wrap reveal">
         <a href="noticias.html" class="btn-ver-mas">Ver todas las noticias <span class="arrow">→</span></a>
@@ -980,12 +972,17 @@ const observer = new IntersectionObserver((entries) => {
 document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale').forEach(el => observer.observe(el));
 
 // MODAL NOTICIAS
-function openModal(icon, fecha, titulo, texto, tag) {
-    document.getElementById('modal-img').textContent = icon;
+function openModal(titulo, texto, imagenUrl, fecha) {
+    var imgEl = document.getElementById('modal-img');
+    if (imagenUrl) {
+        imgEl.innerHTML = '<img src="' + imagenUrl + '" style="width:100%;height:220px;object-fit:cover;border-radius:28px 28px 0 0;">';
+    } else {
+        imgEl.innerHTML = '📰';
+    }
     document.getElementById('modal-fecha').textContent = fecha;
     document.getElementById('modal-titulo').textContent = titulo;
     document.getElementById('modal-texto').textContent = texto;
-    document.getElementById('modal-tag').textContent = tag;
+    document.getElementById('modal-tag').textContent = '';
     document.getElementById('modal').classList.add('open');
     document.body.style.overflow = 'hidden';
 }
@@ -1051,4 +1048,53 @@ document.addEventListener('keydown', e => {
         document.body.style.overflow = '';
     }
 });
+
+// SUPABASE: BANNER + NOTICIAS
+var SUPA_URL_H = 'https://kcshvhekcofydsaoxgyn.supabase.co';
+var SUPA_KEY_H = 'sb_publishable_KVE7FKtabvpRwXnheCHIJw_xP0aoRxP';
+var SUPA_HDRS  = { 'apikey': SUPA_KEY_H, 'Authorization': 'Bearer ' + SUPA_KEY_H };
+
+async function cargarBannerHome() {
+    try {
+        var r = await fetch(SUPA_URL_H + '/rest/v1/banner_coto?id=eq.1', { headers: SUPA_HDRS });
+        var data = await r.json();
+        if (data && data[0] && data[0].activo) {
+            document.getElementById('banner-plazas').classList.add('visible');
+        }
+    } catch(e) {}
+}
+
+async function cargarNoticiasHome() {
+    var grid = document.getElementById('noticias-grid-home');
+    if (!grid) return;
+    try {
+        var r = await fetch(SUPA_URL_H + '/rest/v1/noticias_coto?order=fecha.desc&limit=3', { headers: SUPA_HDRS });
+        var noticias = await r.json();
+        if (!noticias || noticias.length === 0) {
+            grid.innerHTML = '<p style="color:#6b7280;font-size:14px;">Próximamente novedades…</p>';
+            return;
+        }
+        var cards = noticias.map(function(n, i) {
+            var fecha = new Date(n.fecha).toLocaleDateString('es-ES', { day: 'numeric', month: 'long', year: 'numeric' });
+            var delay = i > 0 ? ' style="transition-delay:' + (i * 0.15) + 's"' : '';
+            var textoCorto = n.texto.length > 120 ? n.texto.slice(0, 120) + '…' : n.texto;
+            var imgHtml = n.imagen_url
+                ? '<div class="noticia-img"><img src="' + n.imagen_url + '" style="width:100%;height:100%;object-fit:cover;border-radius:inherit;display:block;"></div>'
+                : '<div class="noticia-img">📰</div>';
+            return '<div class="noticia-card reveal"' + delay + ' onclick="openModal(' + JSON.stringify(n.titulo) + ',' + JSON.stringify(n.texto) + ',' + JSON.stringify(n.imagen_url||'') + ',' + JSON.stringify(fecha) + ')">'
+                + imgHtml
+                + '<div class="noticia-body"><div class="noticia-fecha">' + fecha + '</div>'
+                + '<h3>' + n.titulo + '</h3>'
+                + '<p>' + textoCorto + '</p></div></div>';
+        });
+        grid.innerHTML = cards.join('');
+        document.querySelectorAll('#noticias-grid-home .reveal').forEach(function(el) { observer.observe(el); });
+    } catch(e) {
+        console.error(e);
+    }
+}
+
+cargarBannerHome();
+cargarNoticiasHome();
+
 </script>
