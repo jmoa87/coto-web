@@ -318,38 +318,31 @@
         .reveal-scale.visible { opacity: 1; transform: scale(1); }
 
 
-        /* PANEL NOTICIA EXPANDIDA */
-        .noticia-panel {
-            display: none; grid-column: 1 / -1;
-            background: white; border-radius: 20px; border: 2px solid var(--amarillo);
-            box-shadow: 0 8px 40px rgba(74,144,217,0.15);
-            overflow: hidden; margin-top: 8px;
-            animation: panelIn 0.3s cubic-bezier(0.34,1.4,0.64,1);
+        /* OVERLAY NOTICIA */
+        #overlay-noticia {
+            display: none; position: fixed; inset: 0; z-index: 9999;
+            background: rgba(0,0,0,0.6); align-items: center; justify-content: center; padding: 20px;
         }
-        .noticia-panel.open { display: flex; }
-        @keyframes panelIn { from { opacity:0; transform:translateY(-10px); } to { opacity:1; transform:translateY(0); } }
-        .panel-img {
-            width: 280px; min-height: 220px; flex-shrink: 0;
-            background: var(--azul); display: flex; align-items: center; justify-content: center; font-size: 64px;
+        #overlay-noticia.abierto { display: flex; }
+        #overlay-caja {
+            background: white; border-radius: 24px; width: 100%; max-width: 620px;
+            max-height: 90vh; overflow-y: auto; position: relative;
+            box-shadow: 0 24px 80px rgba(0,0,0,0.3);
         }
-        .panel-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
-        .panel-body { padding: 28px 32px; flex: 1; position: relative; }
-        .panel-fecha { font-size: 12px; color: var(--azul-claro); font-weight: 800; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px; }
-        .panel-body h2 { font-size: 22px; font-weight: 900; margin-bottom: 14px; color: var(--oscuro); line-height: 1.3; }
-        .panel-body p { font-size: 15px; color: var(--gris-texto); line-height: 1.8; }
-        .panel-close {
-            position: absolute; top: 16px; right: 16px;
-            background: var(--azul); border: none; color: white;
-            width: 32px; height: 32px; border-radius: 50%; font-size: 16px; cursor: pointer;
+        #overlay-img { width: 100%; max-height: 320px; object-fit: cover; border-radius: 24px 24px 0 0; display: block; }
+        #overlay-emoji { background: var(--azul); height: 180px; border-radius: 24px 24px 0 0; display: flex; align-items: center; justify-content: center; font-size: 72px; }
+        #overlay-contenido { padding: 28px 32px 32px; }
+        #overlay-fecha { font-size: 12px; color: var(--azul-claro); font-weight: 800; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; }
+        #overlay-titulo { font-size: 24px; font-weight: 900; color: var(--oscuro); margin-bottom: 16px; line-height: 1.3; }
+        #overlay-texto { font-size: 15px; color: #555; line-height: 1.8; }
+        #overlay-cerrar {
+            position: absolute; top: 14px; right: 14px; z-index: 10;
+            width: 36px; height: 36px; border-radius: 50%; border: none; cursor: pointer;
+            background: rgba(0,0,0,0.5); color: white; font-size: 18px;
             display: flex; align-items: center; justify-content: center;
             transition: transform 0.2s, background 0.2s;
         }
-        .panel-close:hover { transform: rotate(90deg) scale(1.1); background: var(--oscuro); }
-        .noticia-card.activa { border: 2px solid var(--amarillo); box-shadow: 0 4px 20px rgba(74,144,217,0.2); }
-        @media (max-width: 600px) {
-            .noticia-panel.open { flex-direction: column; }
-            .panel-img { width: 100%; min-height: 180px; }
-        }
+        #overlay-cerrar:hover { transform: rotate(90deg); background: rgba(0,0,0,0.8); }
 
 
         /* CARD HOVER MEJORADO */
@@ -890,16 +883,6 @@
     <p class="section-sub">Aquí compartimos las aventuras, actividades y momentos especiales de El Coto de los Peques.</p>
     <div class="noticias-grid" id="noticias-grid-home">
         <p id="noticias-loading" style="color:#6b7280;font-size:14px;">Cargando noticias…</p>
-        <!-- PANEL NOTICIA EXPANDIDA -->
-        <div class="noticia-panel" id="noticia-panel">
-            <div class="panel-img" id="panel-img">📰</div>
-            <div class="panel-body">
-                <button class="panel-close" onclick="cerrarPanel()">✕</button>
-                <div class="panel-fecha" id="panel-fecha"></div>
-                <h2 id="panel-titulo"></h2>
-                <p id="panel-texto"></p>
-            </div>
-        </div>
     </div>
     <div class="ver-mas-wrap reveal">
         <a href="noticias.html" class="btn-ver-mas">Ver todas las noticias <span class="arrow">→</span></a>
@@ -935,6 +918,19 @@
         </a>
     </div>
 </section>
+
+<!-- OVERLAY NOTICIA -->
+<div id="overlay-noticia" onclick="if(event.target===this)cerrarOverlay()">
+    <div id="overlay-caja">
+        <button id="overlay-cerrar" onclick="cerrarOverlay()">✕</button>
+        <div id="overlay-img-wrap"></div>
+        <div id="overlay-contenido">
+            <div id="overlay-fecha"></div>
+            <div id="overlay-titulo"></div>
+            <div id="overlay-texto"></div>
+        </div>
+    </div>
+</div>
 
 <!-- FOOTER -->
 <footer>
@@ -975,26 +971,25 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.1 });
 document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale').forEach(el => observer.observe(el));
 
-// PANEL NOTICIA EXPANDIDA
+// OVERLAY NOTICIA
 function openModal(titulo, texto, imagenUrl, fecha) {
-    var imgEl = document.getElementById('panel-img');
+    var wrap = document.getElementById('overlay-img-wrap');
     if (imagenUrl) {
-        imgEl.innerHTML = '<img src="' + imagenUrl + '">';
+        wrap.innerHTML = '<img id="overlay-img" src="' + imagenUrl + '" alt="' + titulo + '">';
     } else {
-        imgEl.innerHTML = '📰';
+        wrap.innerHTML = '<div id="overlay-emoji">📰</div>';
     }
-    document.getElementById('panel-fecha').textContent = fecha;
-    document.getElementById('panel-titulo').textContent = titulo;
-    document.getElementById('panel-texto').textContent = texto;
-    var panel = document.getElementById('noticia-panel');
-    panel.classList.add('open');
-    document.querySelectorAll('.noticia-card').forEach(function(c){ c.classList.remove('activa'); });
-    panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    document.getElementById('overlay-fecha').textContent = fecha;
+    document.getElementById('overlay-titulo').textContent = titulo;
+    document.getElementById('overlay-texto').textContent = texto;
+    document.getElementById('overlay-noticia').classList.add('abierto');
+    document.body.style.overflow = 'hidden';
 }
-function cerrarPanel() {
-    document.getElementById('noticia-panel').classList.remove('open');
-    document.querySelectorAll('.noticia-card').forEach(function(c){ c.classList.remove('activa'); });
+function cerrarOverlay() {
+    document.getElementById('overlay-noticia').classList.remove('abierto');
+    document.body.style.overflow = '';
 }
+function cerrarPanel() { cerrarOverlay(); }
 
 // LIGHTBOX GALERÍA
 function openLightbox(src) {
@@ -1042,7 +1037,7 @@ window.addEventListener('load', showCookieBanner);
 // ESC cierra todo
 document.addEventListener('keydown', e => {
     if (e.key === 'Escape') {
-        cerrarPanel();
+        cerrarOverlay();
         document.getElementById('lightbox').classList.remove('open');
         document.body.style.overflow = '';
     }
