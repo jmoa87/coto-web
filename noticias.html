@@ -45,18 +45,25 @@
 
         .noticias-container { max-width: 900px; margin: 0 auto; padding: 48px 24px 80px; }
         .noticias-lista { display: flex; flex-direction: column; gap: 24px; }
-        .noticias-lista { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px,1fr)); gap: 24px; }
         .noticia-item {
             background: white; border-radius: 20px; overflow: hidden;
-            transition: transform 0.2s, box-shadow 0.2s; cursor: pointer;
+            display: flex; gap: 0; transition: transform 0.2s, box-shadow 0.2s;
+            border-left: 5px solid var(--azul);
         }
-        .noticia-item:hover { transform: translateY(-4px); box-shadow: 0 8px 32px rgba(43,62,161,0.15); }
-        .noticia-img { width: 100%; height: 200px; object-fit: cover; display: block; }
-        .noticia-emoji-wrap { width: 100%; height: 160px; background: var(--azul); display: flex; align-items: center; justify-content: center; font-size: 64px; }
-        .noticia-content { padding: 20px 24px; }
-        .noticia-fecha { font-size: 12px; color: var(--azul-claro); font-weight: 800; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
-        .noticia-content h2 { font-size: 18px; font-weight: 900; margin-bottom: 8px; color: var(--oscuro); }
-        .noticia-content p { font-size: 14px; color: var(--gris-texto); line-height: 1.7; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+        .noticia-item:hover { transform: translateX(6px); box-shadow: 0 8px 32px rgba(43,62,161,0.1); }
+        .noticia-icon {
+            width: 90px; flex-shrink: 0; background: var(--azul);
+            display: flex; align-items: center; justify-content: center; font-size: 36px;
+        }
+        .noticia-content { padding: 20px 24px; flex: 1; }
+        .noticia-meta { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+        .noticia-fecha { font-size: 12px; color: var(--azul-claro); font-weight: 800; text-transform: uppercase; letter-spacing: 1px; }
+        .noticia-tag {
+            background: var(--amarillo-claro); color: var(--oscuro);
+            font-size: 11px; font-weight: 800; padding: 2px 10px; border-radius: 50px;
+        }
+        .noticia-content h2 { font-size: 18px; font-weight: 900; margin-bottom: 8px; }
+        .noticia-content p { font-size: 14px; color: var(--gris-texto); line-height: 1.7; }
 
         footer { background: var(--azul); color: rgba(255,255,255,0.6); padding: 32px 5%; text-align: center; }
         footer a { color: var(--amarillo); text-decoration: none; font-size: 13px; font-weight: 600; }
@@ -77,8 +84,7 @@
             box-shadow: 0 32px 80px rgba(0,0,0,0.25);
         }
         @keyframes modalIn { from { opacity: 0; transform: scale(0.85) translateY(20px); } to { opacity: 1; transform: scale(1) translateY(0); } }
-        .modal-img { min-height: 200px; display: flex; align-items: center; justify-content: center; font-size: 80px; background: var(--azul); border-radius: 28px 28px 0 0; overflow: hidden; }
-        .modal-img img { width: 100%; max-height: 360px; object-fit: cover; border-radius: 28px 28px 0 0; display: block; }
+        .modal-img { height: 200px; display: flex; align-items: center; justify-content: center; font-size: 80px; background: var(--azul); border-radius: 28px 28px 0 0; }
         .modal-body { padding: 32px; }
         .modal-fecha { font-size: 12px; color: var(--azul-claro); font-weight: 800; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px; }
         .modal-body h2 { font-size: 24px; font-weight: 900; margin-bottom: 14px; line-height: 1.2; }
@@ -114,11 +120,10 @@
     <div class="noticias-lista" id="lista">
         <p style="text-align:center;padding:40px;color:#999">Cargando noticias...</p>
     </div>
-</div>
+</div</div>
 
 <footer>
     <p>© 2026 CEI El Coto de los Peques · Alcalá la Real, Jaén</p>
-    <div class="footer-promo"><a href="mailto:titanestudiosorg@gmail.com">✨ Escríbenos si quieres una web así</a></div>
 </footer>
 
 <!-- MODAL -->
@@ -139,18 +144,12 @@
 var SUPA_URL = 'https://kcshvhekcofydsaoxgyn.supabase.co';
 var SUPA_KEY = 'sb_publishable_KVE7FKtabvpRwXnheCHIJw_xP0aoRxP';
 
-function openModal(titulo, texto, imagen_url, fecha) {
-    var box = document.getElementById('modal-img');
-    if (imagen_url) {
-        box.innerHTML = '<img src="' + imagen_url + '" alt="">';
-    } else {
-        box.innerHTML = '📰';
-        box.style.fontSize = '80px';
-    }
+function openModal(icon, fecha, titulo, texto, tag) {
+    document.getElementById('modal-img').textContent = icon;
     document.getElementById('modal-fecha').textContent = fecha;
     document.getElementById('modal-titulo').textContent = titulo;
     document.getElementById('modal-texto').textContent = texto;
-    document.getElementById('modal-tag').textContent = '';
+    document.getElementById('modal-tag').textContent = tag;
     document.getElementById('modal').classList.add('open');
     document.body.style.overflow = 'hidden';
 }
@@ -173,7 +172,7 @@ function meses(n) {
 function formatFecha(s) {
     var d = new Date(s);
     if (isNaN(d.getTime())) return s;
-    return d.getDate() + ' DE ' + meses(d.getMonth()).toUpperCase() + ' DE ' + d.getFullYear();
+    return d.getDate() + ' ' + meses(d.getMonth()) + ' ' + d.getFullYear();
 }
 
 fetch(SUPA_URL + '/rest/v1/noticias_coto?order=created_at.desc', {
@@ -191,20 +190,19 @@ fetch(SUPA_URL + '/rest/v1/noticias_coto?order=created_at.desc', {
         var n = data[i];
         var titulo = n.titulo || '';
         var texto = n.texto || '';
-        var imagen_url = n.imagen_url || '';
         var fecha = formatFecha(n.created_at || '');
         var t = JSON.stringify(titulo);
         var x = JSON.stringify(texto);
-        var im = JSON.stringify(imagen_url);
         var f = JSON.stringify(fecha);
-        html += '<div class="noticia-item" onclick="openModal(' + t + ',' + x + ',' + im + ',' + f + ')">';
-        if (imagen_url) {
-            html += '<img class="noticia-img" src="' + imagen_url + '" alt="' + titulo + '" loading="lazy">';
+        var onclick = 'openModal(' + JSON.stringify('📰') + ',' + f + ',' + t + ',' + x + ',' + JSON.stringify('') + ')';
+        html += '<div class="noticia-item" onclick="' + onclick + '">';
+        if (n.imagen_url) {
+            html += '<img src="' + n.imagen_url + '" style="width:100%;height:200px;object-fit:cover;display:block" alt="">';
         } else {
-            html += '<div class="noticia-emoji-wrap">📰</div>';
+            html += '<div class="noticia-icon">📰</div>';
         }
         html += '<div class="noticia-content">';
-        html += '<div class="noticia-fecha">' + fecha + '</div>';
+        html += '<div class="noticia-meta"><span class="noticia-fecha">' + fecha + '</span></div>';
         html += '<h2>' + titulo + '</h2>';
         html += '<p>' + texto + '</p>';
         html += '</div></div>';
@@ -212,7 +210,7 @@ fetch(SUPA_URL + '/rest/v1/noticias_coto?order=created_at.desc', {
     lista.innerHTML = html;
 })
 .catch(function() {
-    document.getElementById('lista').innerHTML = '<p style="text-align:center;padding:40px;color:#999">Error al cargar noticias.</p>';
+    document.getElementById('lista').innerHTML = '<p style="text-align:center;padding:40px;color:#999">Error al cargar.</p>';
 });
 </script>
 </body>
