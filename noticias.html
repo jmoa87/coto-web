@@ -118,12 +118,12 @@
 
 <div class="noticias-container">
     <div class="noticias-lista" id="lista">
-        <p style="text-align:center;padding:40px;color:#999">Cargando noticias...</p>
-    </div>
-</div</div>
+    </div>    </div>
+</div>
 
 <footer>
     <p>© 2026 CEI El Coto de los Peques · Alcalá la Real, Jaén</p>
+    <div class="footer-promo"><a href="mailto:titanestudiosorg@gmail.com">✨ Escríbenos si quieres una web así</a></div>
 </footer>
 
 <!-- MODAL -->
@@ -141,9 +141,6 @@
 </div>
 
 <script>
-var SUPA_URL = 'https://kcshvhekcofydsaoxgyn.supabase.co';
-var SUPA_KEY = 'sb_publishable_KVE7FKtabvpRwXnheCHIJw_xP0aoRxP';
-
 function openModal(icon, fecha, titulo, texto, tag) {
     document.getElementById('modal-img').textContent = icon;
     document.getElementById('modal-fecha').textContent = fecha;
@@ -166,13 +163,12 @@ document.addEventListener('keydown', function(e) {
     }
 });
 
-function meses(n) {
-    return ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'][n];
-}
-function formatFecha(s) {
-    var d = new Date(s);
-    if (isNaN(d.getTime())) return s;
-    return d.getDate() + ' ' + meses(d.getMonth()) + ' ' + d.getFullYear();
+var SUPA_URL = 'https://kcshvhekcofydsaoxgyn.supabase.co';
+var SUPA_KEY = 'sb_publishable_KVE7FKtabvpRwXnheCHIJw_xP0aoRxP';
+
+function fmt(s) {
+    var d = new Date(s), ms = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+    return isNaN(d) ? s : d.getDate() + ' ' + ms[d.getMonth()] + ' ' + d.getFullYear();
 }
 
 fetch(SUPA_URL + '/rest/v1/noticias_coto?order=created_at.desc', {
@@ -181,37 +177,28 @@ fetch(SUPA_URL + '/rest/v1/noticias_coto?order=created_at.desc', {
 .then(function(r) { return r.json(); })
 .then(function(data) {
     var lista = document.getElementById('lista');
-    if (!data || data.length === 0) {
-        lista.innerHTML = '<p style="text-align:center;padding:40px;color:#999">No hay noticias todavía.</p>';
-        return;
-    }
-    var html = '';
+    if (!data || !data.length) { lista.innerHTML = '<p style="padding:40px;text-align:center;color:#999">No hay noticias todavía.</p>'; return; }
+    var h = '';
     for (var i = 0; i < data.length; i++) {
         var n = data[i];
-        var titulo = n.titulo || '';
-        var texto = n.texto || '';
-        var fecha = formatFecha(n.created_at || '');
-        var t = JSON.stringify(titulo);
-        var x = JSON.stringify(texto);
-        var f = JSON.stringify(fecha);
-        var onclick = 'openModal(' + JSON.stringify('📰') + ',' + f + ',' + t + ',' + x + ',' + JSON.stringify('') + ')';
-        html += '<div class="noticia-item" onclick="' + onclick + '">';
+        var titulo = (n.titulo||'').replace(/"/g,'&quot;');
+        var texto = (n.texto||'').replace(/"/g,'&quot;');
+        var fecha = fmt(n.created_at||'');
+        var fechaE = fecha.replace(/"/g,'&quot;');
+        var ic = n.imagen_url ? '' : '📰';
+        var oc = "openModal(" + JSON.stringify(ic) + "," + JSON.stringify(fechaE) + "," + JSON.stringify(titulo) + "," + JSON.stringify(texto) + ",'')";
+        h += '<div class="noticia-item" onclick="' + oc + '">';
         if (n.imagen_url) {
-            html += '<img src="' + n.imagen_url + '" style="width:100%;height:200px;object-fit:cover;display:block" alt="">';
+            h += '<div class="noticia-icon"><img src="'+n.imagen_url+'" style="width:100%;height:100%;object-fit:cover"></div>';
         } else {
-            html += '<div class="noticia-icon">📰</div>';
+            h += '<div class="noticia-icon">📰</div>';
         }
-        html += '<div class="noticia-content">';
-        html += '<div class="noticia-meta"><span class="noticia-fecha">' + fecha + '</span></div>';
-        html += '<h2>' + titulo + '</h2>';
-        html += '<p>' + texto + '</p>';
-        html += '</div></div>';
+        h += '<div class="noticia-content"><div class="noticia-meta"><span class="noticia-fecha">'+fecha+'</span></div>';
+        h += '<h2>'+n.titulo+'</h2><p>'+n.texto+'</p></div></div>';
     }
-    lista.innerHTML = html;
+    lista.innerHTML = h;
 })
-.catch(function() {
-    document.getElementById('lista').innerHTML = '<p style="text-align:center;padding:40px;color:#999">Error al cargar.</p>';
-});
+.catch(function() { document.getElementById('lista').innerHTML = '<p style="padding:40px;text-align:center;color:#999">Error al cargar.</p>'; });
 </script>
 </body>
 </html>
